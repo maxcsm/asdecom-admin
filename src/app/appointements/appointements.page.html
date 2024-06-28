@@ -1,0 +1,229 @@
+<ion-header>
+  <ion-toolbar color="secondary">
+    <ion-buttons slot="start">
+      <ion-menu-button ></ion-menu-button>
+    </ion-buttons>
+    <ion-title >
+     Programmes
+     </ion-title>
+     <ion-buttons slot="end" >
+      <ion-button  id="open-storie" ><ion-icon name="add-circle"></ion-icon> Ajouter  </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+
+
+<ion-content>
+  <ion-content>
+    <ion-grid>
+      <ion-row style="background-color: #E4E4E4; border-radius: 10px;">
+        <ion-col size-xl="8" size-md="6" size-xs="12">
+          <ion-searchbar type="text"  placeholder="Rechercher par titre" debounce="200"  [(ngModel)]="filter" (ionChange)="handleChange($event)"></ion-searchbar>
+        </ion-col>
+
+        <ion-col size-xl="4" size-md="6" size-xs="12" style="padding-top:12px;">
+          <ion-button color="light" (click)="reset()"> <ion-icon name="refresh-outline"></ion-icon> </ion-button>
+          <ion-button  color="light" >   Nombre de résultats : <b>{{total}}</b></ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+    <ion-list>
+      <ion-item button *ngFor="let item of posts" >
+        <ion-avatar slot="start" class="ion-hide-sm-down">
+          <ion-icon name="accessibility-outline"></ion-icon>
+        </ion-avatar>
+
+
+        <ion-label (click)="edit($event, item)">
+          <ion-text class="ion-text-wrap">
+            <h2><b> {{item.title}} </b></h2>
+            <small> ID {{item.id}} {{item.content}} </small>
+          </ion-text>
+        </ion-label>
+
+        <ion-label (click)="edit($event, item)">
+          <ion-text class="ion-text-wrap">
+            <small> Début le <b>{{item.start_at| date: 'dd/MM/yyyy'}}</b> à <b> {{item.start_at| date:'HH:mm' }} </b> </small>
+          </ion-text>
+        </ion-label>
+      
+        <ion-label (click)="edit($event, item)">
+          <ion-text class="ion-text-wrap">
+            <small> Fin le <b>{{item.end_at| date: 'dd/MM/yyyy'}}</b> à <b> {{item.end_at| date:'HH:mm' }} </b> </small>
+          </ion-text>
+        </ion-label>
+      
+
+        <ion-label class="ion-hide-sm-down" (click)="edit($event, item)" >
+          <ion-badge color="medium" slot="end" *ngIf="item.state==1">  Info </ion-badge>
+          <ion-badge color="medium" slot="end" *ngIf="item.state==2">  Event </ion-badge>
+          <ion-badge color="success" slot="end" *ngIf="item.state==3"> Atelier </ion-badge>
+          <ion-badge color="medium" slot="end" *ngIf="item.state==5"> Transport </ion-badge>
+        </ion-label>
+
+
+        <ion-label class="ion-hide-sm-down" (click)="edit($event, item)" >
+          <ion-badge color="success" slot="end" *ngIf="item.state==3">  {{item.category}} </ion-badge>
+          <ion-badge color="success" slot="end" *ngIf="item.state==''">  ts groupes </ion-badge>
+        </ion-label>
+
+
+
+        <ion-label class="ion-hide-sm-down" (click)="edit($event, item)" >
+          <ion-badge color="medium" slot="end">  {{item.session_id}} </ion-badge>
+        </ion-label>
+
+      
+        <ion-button ion-button outline item-end small color="light" (click)="delete($event, item)"><ion-icon name="trash-outline"></ion-icon></ion-button>
+      </ion-item>
+    </ion-list>
+   
+    <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+      <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Chargement..."> </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+  </ion-content>
+
+
+  <ion-modal trigger="open-storie" (willDismiss)="onWillDismiss($event)">
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+          <ion-buttons slot="start">
+       
+          </ion-buttons>
+          <ion-title> Ajouter </ion-title>
+          <ion-buttons slot="end" color="primary">
+            <ion-button (click)="modal.dismiss()"> Annuler </ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+
+
+      <ion-content class="ion-padding">
+
+        <ion-row >
+          <ion-col sizeLg="12" sizeMd="12" sizeXs="12" > 
+            <ion-item class="roundedInput">
+              <ion-label  position="stacked">Titre</ion-label>
+              <ion-input inputmode="text"[(ngModel)]="title" placeholder="Titre">  </ion-input>
+            </ion-item>
+          </ion-col>
+         </ion-row>
+
+       <ion-row >
+        <ion-col sizeLg="12" sizeMd="12" sizeXs="12" > 
+          <ion-item class="roundedInput">
+            <ion-label  position="stacked">Description</ion-label>
+            <ion-textarea placeholder="Ajoutez une description ..." [autoGrow]="true" [(ngModel)]="content">
+          </ion-textarea>
+          </ion-item>
+        </ion-col>
+       </ion-row>
+
+
+       <ion-row >
+        <ion-col sizeLg="6" sizeMd="6" sizeXs="12" >
+          <ion-label color="dark" position="stacked">Session</ion-label>
+          <select [(ngModel)]="view" [(ngModel)]="session_id">
+            <option value="{{item.id}}"  *ngFor="let item of sessions" > {{item.id}} {{item.title}}</option>
+          </select>
+        </ion-col>
+        <ion-col sizeLg="6" sizeMd="6" sizeXs="12" >
+        </ion-col>
+      </ion-row>
+
+      <ion-row >
+        <ion-col sizeLg="6" sizeMd="6" sizeXs="12" >
+          <ion-label color="dark" position="stacked">Type d'évènement</ion-label>
+          <select [(ngModel)]="state">
+            <option value="1" > Info </option>
+            <option value="2" > Event </option>
+            <option value="3" > Atelier </option>
+            <option value="5" > Transport </option>
+          </select>
+        </ion-col>
+        <ion-col sizeLg="6" sizeMd="6" sizeXs="12" >
+        </ion-col>
+      </ion-row>
+
+      <ion-row *ngIf="state==3">
+        <ion-col sizeLg="6" sizeMd="6" sizeXs="12" >
+          <ion-label color="dark" position="stacked">Groupe</ion-label>
+          <select [(ngModel)]="category" >
+            <ion-select-option value="A"> A </ion-select-option>
+            <ion-select-option value="B"> B</ion-select-option>
+            <ion-select-option value="C"> C </ion-select-option>
+            <ion-select-option value="D"> D </ion-select-option>
+            <ion-select-option value="E"> E</ion-select-option>
+            <ion-select-option value="F"> F </ion-select-option>
+            <ion-select-option value="G"> G </ion-select-option>
+            <ion-select-option value="H"> H</ion-select-option>
+            <ion-select-option value="I"> I</ion-select-option>
+            <ion-select-option value="J"> J</ion-select-option>
+            <ion-select-option value="K"> K</ion-select-option>
+            <ion-select-option value="L"> L</ion-select-option>
+            <ion-select-option value="M"> M</ion-select-option>
+            <ion-select-option value="N"> N</ion-select-option>
+            <ion-select-option value="O"> O</ion-select-option> 
+            <ion-select-option value="P"> P</ion-select-option> 
+            <ion-select-option value="Q"> Q</ion-select-option>  
+            <ion-select-option value="R"> R</ion-select-option>   
+            <ion-select-option value="S"> S</ion-select-option>   
+            <ion-select-option value="T"> T</ion-select-option>   
+            <ion-select-option value="U"> U</ion-select-option>   
+            <ion-select-option value="V"> V</ion-select-option>   
+            <ion-select-option value="W"> W</ion-select-option>   
+            <ion-select-option value="X"> X</ion-select-option>   
+            <ion-select-option value="Y"> Y</ion-select-option>   
+            <ion-select-option value="Z"> Z</ion-select-option>  
+          </select>
+        </ion-col>
+        <ion-col sizeLg="6" sizeMd="6" sizeXs="12" >
+        </ion-col>
+      </ion-row>
+
+      <ion-row *ngIf="state==3">
+        <ion-col sizeLg="6" sizeMd="6" sizeXs="12" >
+          <ion-label color="dark" position="stacked">Atelier ID</ion-label>
+          <select [(ngModel)]="atelier_id">
+            <option value="{{item.id}}"  *ngFor="let item of ateliers" > ID {{item.id}} / {{item.title}}</option>
+          </select>
+        </ion-col>
+        <ion-col sizeLg="6" sizeMd="6" sizeXs="12" >
+        </ion-col>
+      </ion-row>
+
+
+      <ion-row >
+        <ion-col sizeLg="6" sizeMd="6" sizeXs="12" >
+          DATE DEBUT <b>{{start_at | date:'dd/MM/yyyy' }} </b>  à <b>{{start_at | date:'HH:mm' }}</b>   <br>
+          <input [(ngModel)]="start_at"  style="color: white;"  type="datetime-local" hourCycle="h24"  step="00:15:00" />
+        </ion-col>
+        <ion-col sizeLg="6" sizeMd="6" sizeXs="12" >
+        </ion-col>
+      </ion-row>
+
+      <ion-row >
+        <ion-col sizeLg="6" sizeMd="6" sizeXs="12" >
+          DATE FIN <b>{{end_at | date:'dd/MM/yyyy' }} </b>  à <b>{{end_at | date:'HH:mm' }}</b>   <br>
+          <input [(ngModel)]="end_at"  style="color: white;" type="datetime-local" hourCycle="h24" step="00:15:00" />
+        </ion-col>
+        <ion-col sizeLg="6" sizeMd="6" sizeXs="12" >
+        </ion-col>
+      </ion-row>
+
+
+  
+
+   
+
+ 
+           <ion-button expand="block" color="primary" (click)="doSave()">Enregister</ion-button>
+   
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+</ion-content>
+

@@ -1,0 +1,67 @@
+<ion-header>
+  <ion-toolbar color="secondary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title> Questionnaire  </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content responsive-sm class="ion-padding">
+  <ion-row>
+    <ion-col sizeLg="12" sizeMd="12" sizeXs="12">
+      <ion-list>
+        <ion-item button *ngFor="let item of posts" >
+          <ion-label (click)="edit($event, item)">
+            <ion-badge color="success" slot="end"> Question </ion-badge>
+            <ion-text class="ion-text-wrap">
+              <h2><b> {{item.question}} </b></h2>
+            </ion-text>
+          </ion-label>
+
+
+          <ion-label (click)="edit($event, item)">
+            <ion-text>
+              <small> Réponse 1  </small>
+              <h2><b> {{item.answer1}} </b></h2>
+            </ion-text>
+          </ion-label>
+
+
+          <ion-label (click)="edit($event, item)">
+            <ion-text>
+              <small> Réponse 2  </small>
+              <h2><b> {{item.answer2}} </b></h2>
+            </ion-text>
+          </ion-label>
+
+
+          <ion-label (click)="edit($event, item)">
+            <ion-text>
+              <small> Réponse 3  </small>
+              <h2><b> {{item.answer3}} </b></h2>
+            </ion-text>
+          </ion-label>
+
+
+          <ion-label (click)="edit($event, item)">
+            <ion-text>
+              <small> Bonne réponse </small>
+              <h2><b> {{item.answer5}} </b></h2>
+            </ion-text>
+          </ion-label>
+  
+          <ion-button ion-button outline item-end small color="light" (click)="delete($event, item)" ><ion-icon name="trash-outline"></ion-icon></ion-button>
+        </ion-item>
+      </ion-list>
+
+
+      <ion-buttons color="secondary">
+        <ion-button (click)="addquestion()"  color="secondary"><ion-icon name="add-circle"></ion-icon> Ajouter  </ion-button>
+      </ion-buttons>
+
+    </ion-col>
+    <ion-col sizeLg="4" sizeMd="4" sizeXs="12" class="padding">
+    </ion-col>
+  </ion-row>
+</ion-content>

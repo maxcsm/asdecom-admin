@@ -1,0 +1,10 @@
+ion-split-pane ion-menu ion-content ion-item {
+    --background: var(--ion-menu-background) !important;
+    --color: #000000 !important;
+    height: 40px;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    border-top-right-radius: 15px;
+    border-top-left-radius: 15px;
+    margin: 8px;
+}

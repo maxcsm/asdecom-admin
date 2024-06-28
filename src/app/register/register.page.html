@@ -1,0 +1,375 @@
+
+<ion-header>
+  <ion-toolbar color="secondary">
+    <ion-buttons slot="start" color="primary">
+      <ion-back-button ></ion-back-button>
+    </ion-buttons>
+    <ion-title > Nouvelle inscription  </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content >
+<ion-row>
+  <ion-col sizeLg="3" sizeMd="3" sizeXs="12" >
+  </ion-col>
+  <ion-col sizeLg="6" sizeMd="6" sizeXs="12" class="bloc">
+
+
+  <form  novalidate class="list-form" *ngIf="formsession">
+      <h2 color="primary"> Choisir votre session de formation </h2>
+      <ion-list>
+        <ion-item button *ngFor="let item of sessions" >
+          <ion-thumbnail slot="start">
+            <img  src="{{item.image}}" *ngIf="item.image"  >
+          </ion-thumbnail>
+  
+          <ion-label >
+            <ion-text>
+              <h2><b> {{item.title}}  </b></h2>
+              <ion-button ion-button (click)="sessionSelect($event, item)">Continuer</ion-button>
+            </ion-text>
+          </ion-label>
+        </ion-item>
+      </ion-list>
+    </form>
+
+
+         <form [formGroup]="onRegisterForm1" (ngSubmit)="submitForm1()" novalidate class="list-form" *ngIf="form1">
+          <h2 color="primary"> Informations 1/4 </h2>
+      
+           <ion-row >
+            <ion-col sizeLg="6" sizeMd="6" sizeXs="12" >
+               <ion-item class="roundedInput">
+                 <ion-label position="floating">Nom *</ion-label>
+                <ion-input inputmode="text" [(ngModel)]="lastname" formControlName="lastname">  </ion-input>
+              </ion-item>
+            </ion-col>
+         
+            <ion-col sizeLg="6" sizeMd="6" sizeXs="12" > 
+               <ion-item class="roundedInput">
+                <ion-label position="floating">Prénom * </ion-label>
+                <ion-input inputmode="text"[(ngModel)]="firstname" formControlName="firstname">  </ion-input>
+              </ion-item>
+            </ion-col>
+        </ion-row>
+
+        <ion-row >
+          <ion-col sizeLg="12" sizeMd="12" sizeXs="12" > 
+            <ion-item class="roundedInput">
+              <ion-label  position="floating">Fonction * </ion-label>
+              <ion-input inputmode="text" [(ngModel)]="customer_type" formControlName="customer_type">  </ion-input>
+            </ion-item>
+          </ion-col>
+         </ion-row>
+
+         <ion-row >
+          <ion-col sizeLg="12" sizeMd="12" sizeXs="12" >
+            <ion-label  position="floating">Sexe</ion-label>
+            <select [(ngModel)]="sexe" color="light" formControlName="sexe">
+              <option value="Femme"> Femme </option>
+              <option value="Homme"> Homme </option>
+            </select>
+          </ion-col>
+        </ion-row>
+
+
+        <ion-row >
+          <ion-col sizeLg="12" sizeMd="12" sizeXs="12" >
+            <ion-label  position="floating">Date de naissance </ion-label>
+            <br>
+            <input type="date"  [(ngModel)]="birth_date" formControlName="birth_date" name="trip-start" value="1980-01-01" min="1950-01-01"  />
+          </ion-col>
+        </ion-row>
+
+        <ion-row >
+          <ion-col sizeLg="12" sizeMd="12" sizeXs="12" >  
+           <b>E-mail *</b> <br>
+            <ion-item class="roundedInput">
+              <ion-label  position="floating">E-mail *</ion-label>
+              <ion-input inputmode="text" [(ngModel)]="email" formControlName="email">  </ion-input>
+            </ion-item>
+          </ion-col>
+         </ion-row>
+
+         <ion-row >
+        <ion-col sizeLg="6" sizeMd="6" sizeXs="12" > 
+          <ion-item class="roundedInput">
+            <ion-label position="floating"> Mobile * </ion-label>
+            <ion-input type="number" [(ngModel)]="phone_mobile" placeholder="Mobile" formControlName="phone_mobile">  </ion-input>
+          </ion-item>
+        </ion-col>
+       </ion-row>
+
+       <ion-row>
+        <ion-col sizeLg="12" sizeMd="12" sizeXs="12" > 
+        <b>  Mot de passe * </b> <br>
+          <ion-item class="roundedInput">
+            <ion-label color="dark" position="stacked">  <ion-icon name="lock-closed-outline"></ion-icon>  Mot de passe </ion-label>
+            <ion-input  type="password"  [(ngModel)]="password"  placeholder="Mot de passe" formControlName="password"></ion-input>
+          </ion-item>
+        </ion-col>
+       </ion-row>
+
+       <ion-row>
+        <ion-col>
+        <ion-button type="submit" color="primary" expand="block" [disabled]="!onRegisterForm1.valid">  Suivant   </ion-button>
+        </ion-col>
+        </ion-row>
+      </form>
+
+
+
+
+
+      <form [formGroup]="onRegisterForm2" (ngSubmit)="submitForm2()" novalidate class="list-form" *ngIf="form2">
+        <h2 color="primary"> Informations 2/4 </h2>
+   
+        <ion-row >
+          <b>Entreprise *</b> <br> 
+         </ion-row>
+    
+        <ion-row>
+          <ion-col sizeLg="12" sizeMd="12" sizeXs="12" > 
+            <ion-item class="roundedInput">
+              <ion-label position="floating">Nom de l'entreprise *</ion-label>
+              <ion-input inputmode="text"[(ngModel)]="company" placeholder="Nom de l'entreprise" formControlName="company">  </ion-input>
+            </ion-item>
+          </ion-col>
+         </ion-row>
+    
+         <ion-row>
+          <ion-col sizeLg="12" sizeMd="12" sizeXs="12" > 
+            <ion-item class="roundedInput">
+              <ion-label position="floating">Centre régionale *</ion-label>
+              <ion-input inputmode="text"[(ngModel)]="centre_regionale" placeholder="Centre régionale" formControlName="centre_regionale">  </ion-input>
+            </ion-item>
+          </ion-col>
+         </ion-row>
+    
+       <ion-row >
+        <b>Adresse du magasin *</b> <br> 
+       </ion-row>
+
+    <ion-row >
+      <ion-col sizeLg="6" sizeMd="6" sizeXs="12" >      
+        <ion-item class="roundedInput">
+          <ion-label position="floating">Adresse *</ion-label>
+          <ion-input inputmode="text"[(ngModel)]="address" placeholder="Adresse" formControlName="address">  </ion-input>
+        </ion-item>
+      </ion-col>
+      <ion-col sizeLg="6" sizeMd="6" sizeXs="12" > 
+        <ion-item class="roundedInput">
+          <ion-label position="floating">CP *</ion-label>
+          <ion-input type="number"[(ngModel)]="cp" placeholder="Code postal" formControlName="cp">  </ion-input>
+        </ion-item>
+      </ion-col>
+     </ion-row>
+
+    <ion-row>
+      <ion-col sizeLg="6" sizeMd="6" sizeXs="12" > 
+        <ion-item class="roundedInput">
+          <ion-label position="floating">Ville *</ion-label>
+          <ion-input inputmode="text"[(ngModel)]="city" placeholder="Ville" formControlName="city">  </ion-input>
+        </ion-item>
+      </ion-col>
+
+      <ion-col sizeLg="6" sizeMd="6" sizeXs="12" > 
+    
+      </ion-col>
+     </ion-row>
+
+     <ion-row>
+      <ion-col>
+      <ion-button type="submit" color="primary" expand="block" [disabled]="!onRegisterForm2.valid">  Suivant   </ion-button>
+      </ion-col>
+      </ion-row>
+    </form>
+
+
+
+      <form [formGroup]="onRegisterForm3" (ngSubmit)="submitForm3()" novalidate class="list-form" *ngIf="form3">
+        <h2 color="primary"> Informations 3/4 </h2>
+
+
+
+        <ion-row >
+          <ion-col sizeLg="12" sizeMd="12" sizeXs="12" >
+            <ion-label  position="floating"><b>Mon régime alimentaire</b></ion-label>
+            <select [(ngModel)]="regime_alim" color="light" formControlName="regime_alim" class="roundedInput">
+              <option value="Par default"> Par default</option>
+              <option value="Végétarien"> Végétarien </option>
+              <option value="Végan (sans porc et sans alcool)">Végan (sans porc et sans alcool) </option>
+              <option value="Sans produits de la mer">Sans produits de la mer </option>
+              <option value="Allergique">Allergique </option>
+            </select>
+          </ion-col>
+        </ion-row>
+
+
+
+        <ion-row >
+          <ion-col sizeLg="12" sizeMd="12" sizeXs="12" >
+            <ion-label  position="floating"><b>Ma réservation d'hotel </b></ion-label>
+            <select [(ngModel)]="resa_hotel" color="light" formControlName="resa_hotel" class="roundedInput">
+              <option value="Je réserve une chambre individuelle.">   Je réserve une chambre individuelle </option>
+              <option value="Je réserve une chambre Twin (2 lits séparés) avec une connaissance.">Je réserve une chambre Twin (2 lits séparés) avec une connaissance </option>
+              <option value="Je réserve une chambre Twin (2 lits séparés), mais je ne connais personne.">Je réserve une chambre Twin (2 lits séparés), mais je ne connais personne. </option>
+            </select>
+
+          <br>
+          <small  *ngIf="resa_hotel== 'Je réserve une chambre individuelle.'">
+            Je réserve une chambre individuelle (en supplément et limitée aux 40 premières réservations). Chambre non annulable et non remboursable.
+          </small>
+          <small  *ngIf="resa_hotel== 'Je réserve une chambre Twin (2 lits séparés) avec une connaissance.'">
+            Je réserve une chambre Twin (2 lits séparés) avec une connaissance, que je sélectionne dans la liste des personnes inscrites:
+          </small>
+         <small  *ngIf="resa_hotel== 'Je réserve une chambre Twin (2 lits séparés), mais je ne connais personne.'">
+            Je réserve une chambre Twin (2 lits séparés), mais je ne connais personne. Sélectionnez-moi quelqu'un SVP (Même tranche d'âge, même type de fonction).
+          </small>
+          </ion-col>
+
+        </ion-row>
+
+        <ion-row >
+          <ion-col sizeLg="12" sizeMd="12" sizeXs="12" >
+            <ion-label  position="floating"><b>Mon moyen de transport pour venir </b></ion-label>
+            <select [(ngModel)]="transport" color="light" formControlName="transport">
+              <option value="Voiture"> Voiture</option>
+              <option value="Train">Train </option>
+              <option value="Avion">Avion </option>
+              <option value="Autre">Autre</option>
+            </select>
+          </ion-col>
+        </ion-row>
+      
+
+
+       <ion-row>
+        <ion-col>
+        <ion-button type="submit" color="primary" expand="block" [disabled]="!onRegisterForm3.valid">  Suivant   </ion-button>
+        </ion-col>
+        </ion-row>
+      </form>
+
+
+      <form [formGroup]="onRegisterForm4" (ngSubmit)="submitForm4()" novalidate class="list-form" *ngIf="form4">
+        <h2 color="primary"> Informations 4/4 </h2>
+
+
+        <ion-row>
+          <ion-col sizeLg="12" sizeMd="12" sizeXs="12" > 
+            <small>           
+              Un système de conversations "Chat" vous est proposé dans l'application 
+              Vous pouvez créer des groupes de discussions ou parler sur la Place Centrale Communiquez, 
+              y compris avec les intervenants Insérez SVP une photo de vous, ce sera plus sympa pour se reconnaitre sur place!
+            </small>
+          </ion-col>
+         </ion-row>
+
+
+  
+        <ion-row>
+            <ion-col sizeLg="12" sizeMd="12" sizeXs="12" >      
+                <b> Mon année d'arrivée dans la société *</b>
+                <select [(ngModel)]="arrived_date" color="light"  formControlName="arrived_date">
+                  <option value="2024">2024</option>
+                  <option value="2023">2023</option>
+                  <option value="2022">2022</option>
+                  <option value="2021">2021</option>
+                  <option value="2020">2020</option>
+                  <option value="2019">2019</option>
+                  <option value="2018">2018</option>
+                  <option value="2017">2017</option>
+                  <option value="2016">2016</option>
+                  <option value="2015">2015</option>
+                  <option value="2014">2014</option>
+                  <option value="2013">2013</option>
+                </select>
+            </ion-col>
+           </ion-row>
+
+          <ion-row>
+          <ion-col sizeLg="12" sizeMd="12" sizeXs="12" > 
+            <b> Mon parcours *</b>
+            <ion-item class="roundedInput">
+              <ion-label  position="stacked">Mon parcours, mon expérience, me anecdotes et mes passions</ion-label>
+              <ion-textarea [autoGrow]="true" height=500px placeholder="Après 10 ans chez CASA, J'ai rebondi chez LECLERC dans mes produits passions ..." [autoGrow]="true" [(ngModel)]="parcours" formControlName="parcours">
+            </ion-textarea>
+            </ion-item>
+          </ion-col>
+         </ion-row>
+
+
+  
+      <ion-row>
+        <ion-col sizeLg="12" sizeMd="12" sizeXs="12" > 
+          <ion-item >           
+           <small>J'accepte les conditions d'utilisation de cette application</small> 
+            <ion-checkbox slot="start" [(ngModel)]="check1"  formControlName="check1"></ion-checkbox>
+            </ion-item>
+        </ion-col>
+       </ion-row>
+
+       <ion-row>
+        <ion-col sizeLg="12" sizeMd="12" sizeXs="12" > 
+          <ion-item >
+            <small>J'accepte d'être pris en photo par le Photographe de la Formation </small> 
+            <ion-checkbox slot="start" [(ngModel)]="check2"  formControlName="check2"></ion-checkbox>
+            </ion-item>
+        </ion-col>
+       </ion-row>
+
+       <ion-row>
+        <ion-col sizeLg="12" sizeMd="12" sizeXs="12" > 
+          <ion-item >
+            <small> J'Accepte d'indiquer mon âge, sur mon Profil</small> 
+            <ion-checkbox slot="start" [(ngModel)]="check3"  formControlName="check3"></ion-checkbox>
+            </ion-item>
+        </ion-col>
+       </ion-row>
+
+
+       <ion-row>
+        <ion-col sizeLg="12" sizeMd="12" sizeXs="12" > 
+          <ion-item >
+            <small>  Je préfère recevoir des e-mails et SMS (de l'organisation)</small> 
+            <ion-checkbox slot="start" [(ngModel)]="check4"  formControlName="check4"></ion-checkbox>
+            </ion-item>
+        </ion-col>
+       </ion-row>
+
+
+       <ion-row>
+        <ion-col sizeLg="12" sizeMd="12" sizeXs="12" > 
+          <ion-item >
+            <small>  J'accepte de recevoir les informations des intervenants, par e-mail</small> 
+            <ion-checkbox slot="start" [(ngModel)]="check5"  formControlName="check5"></ion-checkbox>
+            </ion-item>
+        </ion-col>
+       </ion-row>
+
+       <ion-row>
+        <ion-col>
+        <ion-button type="submit" color="primary" expand="block" [disabled]="!onRegisterForm4.valid">  Suivant   </ion-button>
+        </ion-col>
+        </ion-row>
+      </form>
+
+
+</ion-col>  
+
+
+<ion-col sizeLg="3" sizeMd="3" sizeXs="12" >
+</ion-col>
+</ion-row>
+
+
+</ion-content>
+
+
+
+
+
+
+
+

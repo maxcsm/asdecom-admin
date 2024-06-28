@@ -1,0 +1,62 @@
+<ion-header>
+  <ion-toolbar color="secondary">
+    <ion-title>Chat</ion-title>
+    <ion-buttons slot="end" >
+      <ion-button (click)="addthread()" ><ion-icon name="add-circle"></ion-icon> Nouveau  </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content color="tertiary" >
+  <ion-row justify-content-center>
+    <ion-col size-md="3" size-lg="3" size-xs="12">
+    </ion-col>
+
+    <ion-col align-self-center size-md="6" size-lg="6" size-xs="12">
+
+      <ion-refresher (ionRefresh)="doRefresh($event)"  slot="fixed">
+        <ion-refresher-content></ion-refresher-content>
+      </ion-refresher>
+    
+      <ion-list  >
+        <ion-item [color]="msg.last_message.seen==0&&msg.from_id.id!==iduser ?'dark':'medium' "  *ngFor="let msg of message" (click)="view($event, msg)" >
+        
+        
+           <div class="border-blue"  slot="start" *ngIf="message.from_id!==iduser">
+            <img  src="{{msg.to_id.user_avatar}}" width="40px" height="40px">
+            </div>
+            <ion-text *ngIf="message.to_id!==iduser">
+            <h5>{{ msg.to_id.firstname}} {{ msg.to_id.lastname}} </h5> 
+            <b> <small>{{msg.last_message.body}} </small> </b><br>
+            <small> le <b>{{msg.last_message.created_at| date: 'dd/MM/yyyy'}}</b> à <b> {{msg.last_message.created_at| date:'HH:mm' }} </b> </small><br>
+           </ion-text>
+          
+    
+            <div class="border-blue"  slot="start"  *ngIf="message.from_id==iduser">
+             <img  src="{{msg.to_id.user_avatar}}" width="40px" height="40px">
+             </div>
+             <ion-text  *ngIf="message.from_id==iduser">
+             <h5>{{ msg.to_id.firstname}} {{ msg.to_id.lastname}} </h5> 
+             <b>{{msg.last_message.body}} </b><br>
+             <small> le <b>{{msg.last_message.created_at| date: 'dd/MM/yyyy'}}</b> à <b> {{msg.last_message.created_at| date:'HH:mm' }} </b> </small><br>
+            </ion-text>
+        
+        </ion-item>
+      </ion-list>
+      <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+        <ion-infinite-scroll-content></ion-infinite-scroll-content>
+      </ion-infinite-scroll>
+    
+      <ion-list class="ion-margin-top ion-text-center" *ngIf="message==0"  >
+        <img src="assets/not-found.png" width="200px">
+        <h1>Oups !</h1>
+        <p>Aucun messages trouvé</p>
+        <ion-button (click)="addthread()">Écrire un nouveau message</ion-button>
+      </ion-list>
+    
+   
+    </ion-col>
+    <ion-col size-md="3" size-lg="3" size-xs="12">
+    </ion-col>
+  </ion-row>
+</ion-content>

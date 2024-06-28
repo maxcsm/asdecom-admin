@@ -1,0 +1,76 @@
+<ion-header>
+  <ion-toolbar color="secondary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title> Post </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content responsive-sm class="ion-padding">
+  <ion-row>
+    <ion-col sizeLg="8" sizeMd="8" sizeXs="12">
+      <ion-list lines="none">
+        <ion-row>
+          <ion-col sizeLg="6" sizeMd="6" sizeXs="12">
+            Id: {{id}} <br>
+          </ion-col>
+        </ion-row>
+
+ 
+
+
+        <ion-row>
+          <ion-col sizeLg="12" sizeMd="12" sizeXs="12">
+            <ion-item class="roundedInput">
+              <ion-label position="stacked">Titre</ion-label>
+              <ion-input inputmode="text" [(ngModel)]="title" placeholder="Titre"> </ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+
+
+
+
+        <ion-row >
+          <ion-col sizeLg="8" sizeMd="8" sizeXs="12">
+            <h4> Ajouter une image </h4>
+            <ion-item>
+              <ion-buttons slot="start">
+                <ion-button>
+                  <ion-icon slot="icon-only" name="attach"></ion-icon>
+                </ion-button>
+              </ion-buttons>
+              <input type="file" (change)="onFileChange($event)" />
+            </ion-item>
+            <img src="{{UrlImage}}images/{{image}}" style="width:200px">
+          </ion-col>
+          <ion-col sizeLg="4" sizeMd="4" sizeXs="12">
+          </ion-col>
+        </ion-row>
+        
+        <ion-row *ngIf="category=='page'">
+          <ion-col sizeLg="12" sizeMd="12" sizeXs="12">
+            <ion-item class="roundedInput">
+              <ion-label position="stacked">Image </ion-label>
+              <ion-input inputmode="text" [(ngModel)]="image" placeholder=""> </ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+
+
+        <ion-item>
+          <div class="item-note" slot="end">
+            <ion-button color="light" size="medium" (click)="doCancel()" >Annuler </ion-button>
+            <ion-button color="secondary" size="medium" (click)="doSave()">Enregistrer</ion-button>
+          </div>
+        </ion-item>
+      </ion-list>
+
+
+    </ion-col>
+    <ion-col sizeLg="4" sizeMd="4" sizeXs="12" class="padding">
+    </ion-col>
+  </ion-row>
+</ion-content>

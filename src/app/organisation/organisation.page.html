@@ -1,0 +1,35 @@
+<ion-header [translucent]="false"  class="hidden-xs hidden-lg" >
+  <ion-toolbar mode="ios" color="secondary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Organisation</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content >
+  <ion-row justify-content-center>
+    <ion-col size-md="3" size-lg="3" size-xs="12">
+    </ion-col>
+
+    <ion-col align-self-center size-md="6" size-lg="6" size-xs="12"> 
+      <ion-row >
+          <ion-card style="background-color: white;color:black; width: 100%;"  >
+            <img  src="{{UrlImage}}images/{{image}}" *ngIf="image"  class='image-view' >
+            <ion-card-header style="background-color: white;color:black;">
+              <ion-card-title style="background-color: white;color:black;">{{title}}</ion-card-title>
+            </ion-card-header>
+            <ion-card-content class="ion-text-wrap">
+              <div [innerHTML]="content">
+              </div>
+              <b>{{subtitle}}</b>
+            </ion-card-content>
+          </ion-card>
+      </ion-row>
+  
+    </ion-col>
+    <ion-col size-md="3" size-lg="3" size-xs="12">
+    </ion-col>
+  </ion-row>
+</ion-content>

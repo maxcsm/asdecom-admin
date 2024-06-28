@@ -1,0 +1,63 @@
+
+<ion-header>
+  <ion-toolbar color="secondary">
+    <ion-buttons slot="start">
+      <ion-menu-button ></ion-menu-button>
+    </ion-buttons>
+    <ion-title >
+     Factures
+     </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+    <ion-grid>
+      <ion-row style="background-color: #E4E4E4; border-radius: 10px;">
+        <ion-col size-xl="8" size-md="6" size-xs="12">
+          <ion-searchbar type="text"  placeholder="numéro de facture, entreprise" debounce="200"  [(ngModel)]="filter" (ionChange)="handleChange($event)"></ion-searchbar>
+        </ion-col>
+
+        <ion-col size-xl="4" size-md="6" size-xs="12" style="padding-top:12px;">
+          <ion-button color="primary" (click)="reset()"> <ion-icon name="refresh-outline"></ion-icon> </ion-button>
+          <ion-button  color="primary">  Nombre de résultats : <b>{{total}}</b></ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+    <ion-list>
+      <ion-item button *ngFor="let item of posts" (click)="edit($event, item)">
+        <ion-label>
+          <ion-text>
+            <h2> FACTURE <b>{{item.InvoiceID}}</b></h2>
+          </ion-text>
+        </ion-label>
+        <ion-label>
+          <ion-badge color="light" slot="end" *ngIf="item.InvoiceStatus =='3'" > Annulée </ion-badge>
+          <ion-badge color="success" slot="end" *ngIf="item.InvoiceStatus =='2'" > Payée </ion-badge>
+          <ion-badge color="primary" slot="end"  *ngIf="item.InvoiceStatus =='1'" > Verifiée </ion-badge>
+          <ion-badge color="light"  slot="end"  *ngIf="item.InvoiceStatus =='0'" > A valider  </ion-badge>
+        </ion-label>
+        <ion-label class="ion-hide-sm-down">
+        {{item.ItemDesc}} 
+        </ion-label>
+        <ion-label class="ion-hide-sm-down">
+        {{item.DueDate}}  
+        </ion-label>
+       <b> {{item.Total}} € </b>
+        <ion-badge color="danger" slot="end">  Facture </ion-badge>
+      </ion-item>
+    </ion-list>
+   
+    <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+      <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Chargement..."> </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+  </ion-content>
+
+
+
+
+
+
+
+

@@ -1,0 +1,66 @@
+<ion-header style="background-color: #E4E4E4;">
+  <ion-toolbar >
+    <ion-title >
+   Note atelier
+     </ion-title>
+     <ion-buttons slot="end" >
+      <ion-button color="primary" (click)="closeModal()"><ion-icon name="close-circle"></ion-icon></ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content class="ion-padding" color="tertiary" >
+
+
+  
+
+    <ion-row>
+      <ion-col sizeLg="12" sizeMd="12" sizeXs="12" >      
+          <b style="color:white;"> Ma note qualité des informations *</b>
+          <select [(ngModel)]="note_info" color="light"  >
+            <option value="5"> 5 étoiles *****</option>
+            <option value="4"> 4 étoiles ****</option>
+            <option value="3"> 3 étoiles ***</option>
+            <option value="2"> 2 étoiles **</option>
+            <option value="1"> 1 étoiles *</option>
+          </select>
+      </ion-col>
+     </ion-row>
+
+
+
+    <ion-row>
+      <ion-col sizeLg="12" sizeMd="12" sizeXs="12" >      
+          <b style="color:white;"> Ma note qualité de la présentation *</b>
+          <select [(ngModel)]="note_presentation" color="light"  >
+            <option value="5"> 5 étoiles *****</option>
+            <option value="4"> 4 étoiles ****</option>
+            <option value="3"> 3 étoiles ***</option>
+            <option value="2"> 2 étoiles **</option>
+            <option value="1"> 1 étoiles *</option>
+          </select>
+      </ion-col>
+     </ion-row>
+
+      <ion-row>
+        <ion-col sizeLg="12" sizeMd="12" sizeXs="12" > 
+          <b style="color:white;"> Mon commentaire </b>
+          <ion-item class="roundedInput">
+            <ion-label  position="stacked">Mon commentaire</ion-label>
+            <ion-textarea [autoGrow]="true" height=500px placeholder="Mon commentaire ici ..." [autoGrow]="true" [(ngModel)]="commentaire" >
+            </ion-textarea>
+          </ion-item>
+        </ion-col>
+       </ion-row>
+
+   
+   
+     <ion-button expand="block"  color="primary"  (click)="doSave()" >Enregister</ion-button>
+    
+     
+
+
+
+ 
+</ion-content>

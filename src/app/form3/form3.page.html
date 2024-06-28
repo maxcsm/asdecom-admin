@@ -1,0 +1,319 @@
+<ion-header>
+  <ion-toolbar >
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title> Feuille de Passage CTS + Coplaclean sans abonnement</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content  class="ion-padding">
+<ion-grid>
+
+  <ion-row>
+  <ion-col sizeLg="8" sizeMd="8" sizeXs="12" >
+        <ion-list lines="none" style="margin-top: 20px;"  >
+          <ion-row >
+            <ion-col sizeLg="9" sizeMd="9" sizeXs="12" >
+              <ion-item  *ngFor="let item of client"  lines="none">    
+                  <ion-label> 
+                  <b>  Client </b>   <br>
+                  <b>  id: {{item.id}}</b>   <br>
+                  entreprise: <b> {{item.company}}</b>   <br>
+                  <b> {{item.salutation}} {{item.firstname}} {{item.lastname}}</b>  <br>
+                  <b>  {{item.address}} </b><br>
+                  <b>  {{item.cp}} {{item.city}}</b> <br>
+                  <b>  {{item.state}} {{item.country}}</b> <br>
+                  </ion-label> 
+              </ion-item>
+              </ion-col>   
+              <ion-col sizeLg="3" sizeMd="3" sizeXs="12" >  
+                <ion-item  *ngFor="let item of client"  lines="none">      
+                <ion-button  color="medium" slot="end" size="small"shape="round" *ngIf="item.customer_type=='business'" > Entreprise </ion-button>
+                <ion-button  color="medium" slot="end" size="small"shape="round" *ngIf="item.customer_type=='individual'" > Particulier </ion-button>
+              </ion-item>
+            </ion-col>
+        </ion-row>
+  </ion-list>
+
+
+
+  <ion-list style="margin-top: 20px;" >
+
+
+
+      <ion-row  >
+        <ion-col size="12" padding >
+              <ion-list>
+                <ion-item class="roundedInput">
+                  <ion-label> Situation rencontrée</ion-label>
+                  <ion-select placeholder="Sélectionnez les situations" [multiple]="true" (ionChange)="handleChange($event)" [(ngModel)]="label1">
+                    <ion-select-option value="Punaise">Punaise</ion-select-option>
+                    <ion-select-option value="Puce">Puce</ion-select-option>
+                    <ion-select-option value="Cafard">Cafard</ion-select-option>
+                    <ion-select-option value="Rat">Rat</ion-select-option>
+                    <ion-select-option value="Souris">Souris</ion-select-option>
+                    <ion-select-option value="Guepes">Guepes</ion-select-option>
+                  </ion-select>
+                </ion-item>
+              </ion-list>
+        </ion-col>
+      </ion-row>
+ 
+        <ion-row  >
+          <ion-col size="12" padding >
+                <ion-list>
+                  <ion-item class="roundedInput">
+                    <ion-label> Passage </ion-label>
+                    <ion-select placeholder="Sélectionnez les situations" [multiple]="false" (ionChange)="handleChange($event)" [(ngModel)]="label2">
+                      <ion-select-option value="1er Passage">1er Passage</ion-select-option>
+                      <ion-select-option value="2eme Passage">2eme Passage</ion-select-option>
+                      <ion-select-option value="Passage Garantie">Passage Garantie</ion-select-option>
+                      <ion-select-option value="Routine / CTS">Routine / CTS</ion-select-option>
+                      <ion-select-option value="Autre"> Autre</ion-select-option>
+                    </ion-select>
+                  </ion-item>
+                </ion-list>
+          </ion-col>
+        </ion-row>
+        </ion-list>
+    
+
+  
+    <ion-list style="margin-top: 20px;" >
+      <ion-row  >
+        <ion-col size="12" padding >
+              <ion-list>
+                 <b>Rapport du technicien Pour Particulier</b>
+              </ion-list>
+        </ion-col>
+      </ion-row>
+
+      <ion-row  >
+        <ion-col size="12" padding >
+              <ion-list>
+                <ion-item>
+                  <ion-label> Insectes CTS+ </ion-label>
+                  <ion-select placeholder="Sélectionnez" [multiple]="true" (ionChange)="handleChange($event)" [(ngModel)]="label3">
+                    <ion-select-option value="Traitement de surface">Traitement de surface</ion-select-option>
+                    <ion-select-option value="Armoires">Armoires</ion-select-option>
+                    <ion-select-option value="Bureau">Bureau</ion-select-option>
+                    <ion-select-option value="Lits">Lits</ion-select-option>
+                    <ion-select-option value="Fissures">Fissures</ion-select-option>
+                    <ion-select-option value="Chambranle de portes">Chambranle de portes</ion-select-option>
+                    <ion-select-option value="Plinthes">Plinthes</ion-select-option>
+                    <ion-select-option value="Sommiers">Sommiers</ion-select-option>
+                    <ion-select-option value="Fentes">Fentes</ion-select-option>
+                    <ion-select-option value="Têtes de lit">Têtes de lit</ion-select-option>
+                  </ion-select>
+                </ion-item>
+              </ion-list>
+        </ion-col>
+      </ion-row>
+   
+    </ion-list>
+
+
+    <ion-list style="margin-top: 20px;" >
+     
+        <ion-row>
+          <ion-col size="12" padding >
+                <ion-list>
+                  <ion-item>
+                    <ion-label> Insectes </ion-label>
+                    <ion-select placeholder="Sélectionnez les situations" [multiple]="true" (ionChange)="handleChange($event)" [(ngModel)]="label4">
+                      <ion-select-option value="Placement de boites a souris">Placement de boites a souris</ion-select-option>
+                      <ion-select-option value="Placement de boites a Rats">Placement de boites a Rats</ion-select-option>
+                      <ion-select-option value="Rechargement Plaque de Colle">Rechargement Plaque de Colle pour rongeurs</ion-select-option>
+                      <ion-select-option value="Entretien des boites a souris">Entretien des boites a souris</ion-select-option>
+                      <ion-select-option value="Entretien des boites a Rats">Entretien des boites a Rats</ion-select-option>
+                      <ion-select-option value="Entretien Appâts Cafards">Entretien Appâts Cafards</ion-select-option>
+                      <ion-select-option value="Rechargement Plaque de Colle Pour Rongeurs">Rechargement Plaque de Colle Pour Rongeurs</ion-select-option>
+                    </ion-select>
+                  </ion-item>
+                </ion-list>
+          </ion-col>
+        </ion-row>
+
+
+        <ion-row>
+        <ion-col size="12" padding >
+              <ion-list>
+                <ion-item>
+                  <ion-label> Pièces Traitée </ion-label>
+                  <ion-select placeholder="Sélectionnez " [multiple]="true" (ionChange)="handleChange($event)" [(ngModel)]="label5">
+                    <ion-select-option value="Salle de bain">Salle de bain</ion-select-option>
+                    <ion-select-option value="Cuisine">Cuisine</ion-select-option>
+                    <ion-select-option value="Bureau">Bureau</ion-select-option>
+                    <ion-select-option value="Cave">Cave</ion-select-option>
+                    <ion-select-option value="Entrée">Entrée</ion-select-option>
+                    <ion-select-option value="Cave">Cave</ion-select-option>
+                    <ion-select-option value="Escalier">Escalier</ion-select-option>
+                    <ion-select-option value="Toit">Toit</ion-select-option>
+                    <ion-select-option value="Garage">Garage</ion-select-option>
+                    <ion-select-option value="Salon">Salon</ion-select-option>
+                    <ion-select-option value="Couloir">Couloir</ion-select-option>
+                    <ion-select-option value="Terrasse">Terrasse</ion-select-option>
+                    <ion-select-option value="Salle à manger"> Salle à manger</ion-select-option>
+                    <ion-select-option value="Cheminée">Cheminée</ion-select-option>
+                    <ion-select-option value="Chambre">Chambre</ion-select-option>
+                    <ion-select-option value="Balcon">Balcon</ion-select-option>
+                    <ion-select-option value="Entrée">Entrée</ion-select-option>
+                    <ion-select-option value="Toilette">Toilette</ion-select-option>
+                    <ion-select-option value="Rechargement Plaque de Colle Pour Rongeurs">Rechargement Plaque de Colle Pour Rongeurs</ion-select-option>
+                  </ion-select>
+                </ion-item>
+              </ion-list>
+        </ion-col>
+      </ion-row>
+
+   
+      <ion-row>
+        <ion-col size="12" padding >
+              <ion-list>
+                <ion-item>
+                  <ion-label> Produits Utilisés / Poducts Used </ion-label>
+                  <ion-select placeholder="Sélectionnez" [multiple]="true" (ionChange)="handleChange($event)" [(ngModel)]="label6">
+                    <ion-select-option value="Exit 100 pro Belgagri">Exit 100 pro Belgagri</ion-select-option>
+                    <ion-select-option value="ThAtrin">ThAtrin</ion-select-option>
+                    <ion-select-option value="BASF Goliath Cockroach Gel">BASF Goliath Cockroach Gel</ion-select-option>
+                    <ion-select-option value="SORKIL® BLOC">SORKIL® BLOC</ion-select-option>
+                    <ion-select-option value="Souris / Storm® Pasta">Souris / Storm® Pasta</ion-select-option>
+                    <ion-select-option value="Fourmis">Fourmis</ion-select-option>
+                    <ion-select-option value="Plaque de colle">Plaque de colle</ion-select-option>
+                  </ion-select>
+                </ion-item>
+              </ion-list>
+        </ion-col>
+      </ion-row>
+
+
+      <ion-row  >
+        <ion-col size="12" padding >
+              <ion-list>
+                <ion-item>
+                  <ion-label> Recommandations </ion-label>
+                  <ion-select placeholder="Rapport Spécifiques" [multiple]="true" (ionChange)="handleChange($event)" [(ngModel)]="label7">
+                    <ion-select-option value="Ne pas nettoyer à 10 cm des plinthes.">Ne pas nettoyer à 10 cm des plinthes.</ion-select-option>
+                    <ion-select-option value="Instructions de Rebouchage">Instructions de Rebouchage</ion-select-option>
+                  </ion-select>
+                </ion-item>
+              </ion-list>
+        </ion-col>
+      </ion-row>
+
+
+
+      <ion-row >
+        <ion-col sizeLg="12" sizeMd="12" sizeXs="12" > 
+          <ion-item class="roundedInput">
+            <ion-label  position="stacked">Recommandations Spécifiques</ion-label>
+            <ion-textarea placeholder="Ajoutez une description ..." [autoGrow]="true" [(ngModel)]="label8">
+          </ion-textarea>
+          </ion-item>
+        </ion-col>
+       </ion-row>
+
+      </ion-list>
+
+      <ion-list style="margin-top: 20px;" >
+
+       <ion-row  >
+        <ion-col size="6" padding >
+          <ion-label > Prix €  </ion-label>
+          <ion-item class="roundedInput">
+          <ion-input inputmode="number"[(ngModel)]="label9" placeholder="Montant">  </ion-input>
+         </ion-item>
+       </ion-col>
+      </ion-row>
+
+
+      <ion-row  >
+        <ion-col size="12" padding >
+              <ion-list>
+                <ion-item>
+                  <ion-label> Mode Paiement </ion-label>
+                  <ion-select placeholder="Sélectionnez" [multiple]="false" (ionChange)="handleChange($event)" [(ngModel)]="label10">
+                    <ion-select-option value="Cash">Cash</ion-select-option>
+                    <ion-select-option value="Bancontact">Bancontact</ion-select-option>
+                    <ion-select-option value="Payer">Payer</ion-select-option>
+                    <ion-select-option value="Virement">Virement</ion-select-option>
+                  </ion-select>
+                </ion-item>
+              </ion-list>
+        </ion-col>
+      </ion-row>
+
+      </ion-list>
+
+
+    <ion-list style="margin-top: 20px;" >
+      <ion-row>
+        <ion-col sizeLg="8" sizeMd="8" sizeXs="12" >
+          <h4> Ajouter des images </h4>
+          <ion-item  *ngIf="role==2 || role==3 ">
+            <ion-buttons slot="start">
+              <ion-button >
+                <ion-icon slot="icon-only" name="attach"></ion-icon>
+              </ion-button>
+            </ion-buttons>
+            <input type="file" (change)="onFileChange($event)" />
+          </ion-item>
+          <ion-list lines="none" *ngFor="let item of listimage" >
+              <img  src="https://api.alpes-solutech.fr/images/{{item.image}}" style="width:200px">
+        </ion-list>
+        </ion-col>
+        <ion-col sizeLg="4" sizeMd="4" sizeXs="12" >
+        </ion-col>
+    
+      </ion-row>
+      
+  </ion-list>
+
+
+
+
+  <ion-list style="margin-top: 20px;" >
+    <ion-row>
+      <ion-col size="6" padding >
+        <h5  *ngIf="imgsign2" class="text-center">Signature Technicien</h5>
+        <div *ngFor="let item of tech" >
+          <ion-button *ngIf="imgsign2==null" (click)="openModalTech()" color="primary"><ion-icon name="add-circle"></ion-icon>
+            Ajouter la signature technicien 
+           </ion-button>
+          <h5 class="text-center"> <b>{{item.firstname}} {{item.lastname}} </b> </h5>
+          </div>
+          <img *ngIf="imgsign2" [src]="imgsign2"/>
+       </ion-col>
+      <ion-col size="6" padding >
+        <h5  *ngIf="imgsign" class="text-center">Signature Client</h5>
+        <div *ngFor="let item of client" >
+          <ion-button *ngIf="imgsign==null" (click)="openModal()" color="primary"><ion-icon name="add-circle"></ion-icon>
+            Ajouter la signature client
+           </ion-button>
+          <h5 class="text-center"> <b>{{item.firstname}} {{item.lastname}} </b> </h5>
+          </div>
+          <img *ngIf="imgsign" [src]="imgsign"/>
+       </ion-col>
+    </ion-row>
+</ion-list>
+
+
+    <ion-button size="full" expand="full"  shape="round" color="danger" (click)="savePdf()" style="margin-top: 20px;">
+     Enregistrement PDF<img src="../assets/icon/pdf.png"  >
+    </ion-button>
+
+  </ion-col>
+
+  <ion-col sizeLg="4" sizeMd="4" sizeXs="12" >
+
+  </ion-col>
+</ion-row>
+  </ion-grid>
+</ion-content>
+
+
+
+
+
+

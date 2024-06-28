@@ -1,0 +1,479 @@
+<ion-header>
+  <ion-toolbar color="secondary">
+    <ion-buttons slot="start">
+      <ion-back-button ></ion-back-button>
+    </ion-buttons>
+    <ion-title > Utilisateur </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content responsive-sm  class="ion-padding">
+  <ion-toolbar >
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>   </ion-title>
+    <ion-buttons slot="end">
+      <div  slot="end">
+      </div>
+  </ion-buttons>  
+  </ion-toolbar>
+
+<ion-row>
+  <ion-col sizeLg="8" sizeMd="8" sizeXs="12" class="padding" >
+    <ion-button id="open-modal1"  (click)="searchTech()" color="primary"><ion-icon name="add-circle"></ion-icon>
+      Ajouter une demande d'intervention
+      </ion-button>
+
+
+       
+  <ion-button (click)="newcontrat()" color="primary"><ion-icon name="add-circle"></ion-icon>
+    Créer nouveau contrat
+     </ion-button>
+   
+   
+   
+     <ion-button (click)="doCreatedInvoice()" color="danger" ><ion-icon name="add-circle"></ion-icon>
+       Créer une facture
+        </ion-button>
+   
+   
+    <ion-button (click)="doCreatedQuote()" color="primary"  ><ion-icon name="add-circle"></ion-icon>
+         Créer un devis
+     </ion-button>
+
+          <ion-list lines="none" *ngIf="edit==false" style="margin-top: 20px;" >
+            <ion-row >
+              <ion-col sizeLg="9" sizeMd="9" sizeXs="12" >
+                <ion-item  *ngFor="let item of posts"  lines="none">    
+                    <ion-button  color="medium" slot="end" size="small"shape="round" *ngIf="item.customer_type=='business'" > Entreprise </ion-button>
+                    <ion-button  color="medium" slot="end" size="small"shape="round" *ngIf="item.customer_type=='individual'" > Particulier </ion-button>
+                    <ion-label> 
+                  
+                    <b>  id: {{item.id}}</b>   <br>
+                    entreprise: <b> {{item.company}}</b>   <br>
+                    <b> {{item.salutation}} {{item.firstname}} {{item.lastname}}</b>  <br>
+                    <b>  {{item.address}} </b><br>
+                    <b>  {{item.cp}} {{item.city}}</b> <br>
+                    <b>  {{item.state}} {{item.country}}</b> <br>
+                    Mobile : <b> {{item.phone_mobile}} </b> <br>
+                    Téléphone :  <b>   {{item.phone_number}} </b> <br>
+                    E-mail :  <b>  {{item.email}} </b> <br>
+                    Code barre :  <b>  {{item.code}} </b> <br>
+                    Notes :  <ion-label  class="ion-text-wrap" >
+                    <b>{{item.notes}} </b>
+                    </ion-label>
+                    </ion-label> 
+                    </ion-item>
+                </ion-col>   
+                <ion-col sizeLg="3" sizeMd="3" sizeXs="12" >    
+                <ion-item>
+                    <div class="item-note" slot="end">
+                      <ion-button ion-button item-end small color="secondary" (click)="editpage()"><ion-icon  md="brush"></ion-icon></ion-button>
+                    </div>
+                  </ion-item> 
+              </ion-col>
+          </ion-row>
+        </ion-list>
+        
+        
+
+
+          <ion-list lines="none" >
+            <ion-row >
+              <ion-col sizeLg="12" sizeMd="12" sizeXs="12" >
+                <ion-row >
+                  <ion-col sizeLg="12" sizeMd="12" sizeXs="12" > 
+                    Id: {{iduser}}  <br>
+                    <ion-item class="roundedInput">
+                      <ion-label color="dark" position="stacked">Nom entreprise</ion-label>
+                      <ion-input inputmode="text"[(ngModel)]="company" placeholder="Nom entreprise">  </ion-input>
+                    </ion-item>
+                  </ion-col>
+                 </ion-row>
+                          
+                 <ion-row >
+                    <ion-col sizeLg="12" sizeMd="12" sizeXs="12" > 
+                      <ion-item  class="roundedInput">
+                        <ion-label position="stacked">Type</ion-label>
+                        <ion-select multiple="false" [(ngModel)]="customer_type">
+                          <ion-select-option value="business">Entreprise</ion-select-option>
+                          <ion-select-option value="individual">Particulier</ion-select-option>
+                        </ion-select>
+                      </ion-item>
+                    </ion-col>
+                  </ion-row>
+    
+                   <ion-row >
+                  <ion-col sizeLg="2" sizeMd="2" sizeXs="12" >
+                    <ion-item  class="roundedInput">
+                      <ion-label position="stacked">Civilité </ion-label>
+                      <ion-select multiple="false" [(ngModel)]="salutation">
+                        <ion-select-option value="M.">M.</ion-select-option>
+                        <ion-select-option value="Mme.">Mme.</ion-select-option>
+                      </ion-select>
+                    </ion-item>
+                 </ion-col>
+                  <ion-col sizeLg="5" sizeMd="5" sizeXs="12" >
+                     <ion-item class="roundedInput">
+                       <ion-label color="dark" position="stacked">Nom</ion-label>
+                      <ion-input inputmode="text"[(ngModel)]="lastname" placeholder="Nom" >  </ion-input>
+                    </ion-item>
+                  </ion-col>
+                  <ion-col sizeLg="5" sizeMd="5" sizeXs="12" > 
+                     <ion-item class="roundedInput">
+                      <ion-label color="dark" position="stacked">Prénom</ion-label>
+                      <ion-input inputmode="text"[(ngModel)]="firstname" placeholder="Prénom">  </ion-input>
+                    </ion-item>
+                  </ion-col>
+                </ion-row>
+              <ion-row >
+                <ion-col sizeLg="12" sizeMd="12" sizeXs="12" > 
+                  <ion-item class="roundedInput">
+                    <ion-label color="dark" position="stacked">Adresse</ion-label>
+                    <ion-input inputmode="text"[(ngModel)]="address" placeholder="Adresse">  </ion-input>
+                  </ion-item>
+                </ion-col>
+               </ion-row>
+    
+              <ion-row   >
+                <ion-col sizeLg="5" sizeMd="5" sizeXs="12" > 
+                  <ion-item class="roundedInput">
+                    <ion-label color="dark" position="stacked">CP</ion-label>
+                    <ion-input inputmode="text"[(ngModel)]="cp" placeholder="Code postal">  </ion-input>
+                  </ion-item>
+                </ion-col>
+                <ion-col sizeLg="7" sizeMd="7" sizeXs="12" > 
+                  <ion-item class="roundedInput">
+                    <ion-label color="dark" position="stacked">Ville</ion-label>
+                    <ion-input inputmode="text"[(ngModel)]="city" placeholder="Ville">  </ion-input>
+                  </ion-item>
+                </ion-col>
+               </ion-row>
+    
+               <ion-row   >
+                <ion-col sizeLg="5" sizeMd="5" sizeXs="12" > 
+                  <ion-item class="roundedInput">
+                    <ion-label color="dark" position="stacked">Région</ion-label>
+                    <ion-input inputmode="text"[(ngModel)]="state" placeholder="Région">  </ion-input>
+                  </ion-item>
+                </ion-col>
+                <ion-col sizeLg="7" sizeMd="7" sizeXs="12" > 
+                  <ion-item class="roundedInput">
+                    <ion-label color="dark" position="stacked">Pays</ion-label>
+                    <ion-input inputmode="text"[(ngModel)]="country" placeholder="Pays">  </ion-input>
+                  </ion-item>
+                </ion-col>
+               </ion-row>
+    
+              <ion-row >
+                <ion-col sizeLg="6" sizeMd="6" sizeXs="12" > 
+                  <ion-item class="roundedInput">
+                    <ion-label color="dark" position="stacked">Téléphone ( Fixe )</ion-label>
+                    <ion-input inputmode="phone"[(ngModel)]="phone_number" placeholder="Téléphone fixe">  </ion-input>
+                  </ion-item>
+                </ion-col>
+                <ion-col sizeLg="6" sizeMd="6" sizeXs="12" > 
+                  <ion-item class="roundedInput">
+                    <ion-label color="dark" position="stacked"> Mobile </ion-label>
+                    <ion-input inputmode="phone"[(ngModel)]="phone_mobile" placeholder="mobile">  </ion-input>
+                  </ion-item>
+                </ion-col>
+               </ion-row>
+               <ion-row >
+                <ion-col sizeLg="12" sizeMd="12" sizeXs="12" > 
+                  <ion-item class="roundedInput">
+                    <ion-textarea placeholder="Ajoutez un commentaire ici ..." [autoGrow]="true" [(ngModel)]="notes">
+                  </ion-textarea>
+                  </ion-item>
+                </ion-col>
+               </ion-row>
+                <ion-item >
+                  <div class="item-note" slot="end">
+                  <ion-button color="secondary" size="medium" (click)="editpage()" >Annuler </ion-button>
+                  <ion-button color="danger" size="medium" (click)="getGeocode()">Enregistrer</ion-button>
+                  </div>
+                 </ion-item>
+              </ion-col>
+          </ion-row>
+        </ion-list>
+    
+    
+        <ion-list lines="none" style="margin-top: 20px;"  >
+              <ion-col sizeLg="12" sizeMd="12" sizeXs="12" >
+              <div id="mapId2" style="width: 100%; height: 300px"></div>
+              </ion-col>   
+        </ion-list>
+    
+
+          <ion-list lines="none" *ngIf="edit2==false && client" style="margin-top: 20px;"  >
+            <ion-row >
+              <ion-col sizeLg="12" sizeMd="12" sizeXs="12" >
+                <ion-item  >
+                  <b>  Adresse de facturation </b> 
+                  <div class="item-note" slot="end">
+                    <ion-button ion-button item-end small color="secondary"  (click)="editpage2()"><ion-icon  md="brush"></ion-icon></ion-button>
+                  </div>
+                </ion-item> 
+                <ion-item  *ngFor="let item of posts" >
+                <ion-label> 
+                <b>  {{item.shipping_address}} </b><br>
+                <b>  {{item.shipping_cp}} {{item.shipping_city}}</b> <br>
+                <b>  {{item.shipping_state}} {{item.shipping_country}}</b> <br>
+                Téléphone  : <b>   {{item.shipping_phone}} </b> <br>
+                Téléphone autre  : <b>  {{item.billing_phone}} </b> <br>
+                TVA : <b> {{item.tva_number}} </b> <br>
+                Siret: <b>  {{item.siret_number}} </b> <br>
+              
+                </ion-label> 
+                </ion-item>
+                </ion-col>   
+          </ion-row>
+          </ion-list>
+      
+      
+      
+          <ion-list lines="none"  *ngIf="edit2==true" style="margin-top: 20px;" >
+            <ion-row >
+              <ion-col sizeLg="12" sizeMd="12" sizeXs="12" >
+              <ion-row >
+                <ion-col sizeLg="12" sizeMd="12" sizeXs="12" >
+                  <ion-item  >
+                    <b>  Adresse de facturation </b> 
+                  </ion-item>
+                  <ion-item class="roundedInput">
+                    <ion-label color="dark" position="stacked">Adresse de facturation</ion-label>
+                    <ion-input inputmode="text"[(ngModel)]="shipping_address" placeholder="Adresse facturation">  </ion-input>
+                  </ion-item>
+                </ion-col>
+               </ion-row>
+      
+              <ion-row   >
+                <ion-col sizeLg="5" sizeMd="5" sizeXs="12" > 
+                  <ion-item class="roundedInput">
+                    <ion-label color="dark" position="stacked">CP facturation</ion-label>
+                    <ion-input inputmode="text"[(ngModel)]="shipping_cp" placeholder="Code postal facturation">  </ion-input>
+                  </ion-item>
+                </ion-col>
+                <ion-col sizeLg="7" sizeMd="7" sizeXs="12" > 
+                  <ion-item class="roundedInput">
+                    <ion-label color="dark" position="stacked">Ville facturation</ion-label>
+                    <ion-input inputmode="text"[(ngModel)]="shipping_city" placeholder="Ville facturation">  </ion-input>
+                  </ion-item>
+                </ion-col>
+               </ion-row>
+      
+               <ion-row   >
+                <ion-col sizeLg="5" sizeMd="5" sizeXs="12" > 
+                  <ion-item class="roundedInput">
+                    <ion-label color="dark" position="stacked">Région facturation</ion-label>
+                    <ion-input inputmode="text"[(ngModel)]="shipping_state" placeholder="Région facturation">  </ion-input>
+                  </ion-item>
+                </ion-col>
+                <ion-col sizeLg="7" sizeMd="7" sizeXs="12" > 
+                  <ion-item class="roundedInput">
+                    <ion-label color="dark" position="stacked">Pays facturation</ion-label>
+                    <ion-input inputmode="text"[(ngModel)]="shipping_country" placeholder="Pays facturation">  </ion-input>
+                  </ion-item>
+                </ion-col>
+               </ion-row>
+      
+              <ion-row >
+                <ion-col sizeLg="6" sizeMd="6" sizeXs="12" > 
+                  <ion-item class="roundedInput">
+                    <ion-label color="dark" position="stacked">Téléphone PRO ( Fixe )</ion-label>
+                    <ion-input inputmode="phone"[(ngModel)]="shipping_phone" placeholder="Téléphone Pro">  </ion-input>
+                  </ion-item>
+                </ion-col>
+                <ion-col sizeLg="6" sizeMd="6" sizeXs="12" > 
+                  <ion-item class="roundedInput">
+                    <ion-label color="dark" position="stacked"> Autre téléphone PRO</ion-label>
+                    <ion-input inputmode="phone"[(ngModel)]="billing_phone" placeholder="Autre téléphone">  </ion-input>
+                  </ion-item>
+                </ion-col>
+               </ion-row>
+      
+      
+               <ion-row >
+                <ion-col sizeLg="6" sizeMd="6" sizeXs="12" > 
+                  <ion-item class="roundedInput">
+                    <ion-label color="dark" position="stacked"> Siret </ion-label>
+                    <ion-input inputmode="phone"[(ngModel)]="siret_number" placeholder="Numéro siret">  </ion-input>
+                  </ion-item>
+                </ion-col>
+                <ion-col sizeLg="6" sizeMd="6" sizeXs="12" > 
+                  <ion-item class="roundedInput">
+                    <ion-label color="dark" position="stacked"> Numéro de TVA </ion-label>
+                    <ion-input inputmode="phone"[(ngModel)]="tva_number" placeholder="Numéro TVA">  </ion-input>
+                  </ion-item>
+                </ion-col>
+               </ion-row>
+         
+                <ion-item >
+                  <div class="item-note" slot="end">
+                  <ion-button color="secondary" size="medium" (click)="editpage2()" >Annuler </ion-button>
+                  <ion-button color="danger" size="medium" (click)="doSaveInvoiceProfil()">Enregistrer</ion-button>
+                  </div>
+                 </ion-item>
+              </ion-col>
+          
+          </ion-row>
+        </ion-list>
+      
+      
+
+
+
+
+
+
+
+
+
+    <ion-list style="margin-top: 20px;"  *ngIf="client" >
+      <ion-row >
+        <ion-col sizeLg="9" sizeMd="9" sizeXs="12" >
+          <ion-item >
+            <b> Interventions </b>
+           </ion-item>
+          </ion-col>  
+       </ion-row>
+
+    <ion-list  *ngFor="let item of listappointements" >
+
+      <ion-item class="ion-text-wrap" >
+
+      <ion-label  class="ion-text-wrap" >
+         <b> {{item.title}}</b> <br>
+         <ion-badge color="danger" slot="end" *ngIf="item.state==1">  Rdv non attribué </ion-badge>
+         <ion-badge color="warning" slot="end" *ngIf="item.state==2">  Rdv à venir </ion-badge>
+         <ion-badge color="success" slot="end" *ngIf="item.state==3">  Rdv terminé </ion-badge>
+         {{item.content}} <br>
+        le <b>{{item.start_at| date: 'dd/MM/yyyy'}}</b> à <b> {{item.start_at| date:'hh:mm' }} </b> <br>
+
+        <ion-button  (click)="form2($event, item)" color="primary"><ion-icon name="add-circle"></ion-icon>
+        Formulaire de passage Abonnement
+        </ion-button>
+
+        <ion-button  (click)="form3($event, item)" color="primary"><ion-icon name="add-circle"></ion-icon>
+          Formulaire de passage Sans abonnement
+          </ion-button>
+  
+
+      </ion-label>
+      
+    
+
+    </ion-item>
+
+   
+  </ion-list>
+</ion-list>
+
+    
+
+      <ion-list style="margin-top: 20px;" *ngIf="client"  >
+        <ion-row >
+          <ion-col sizeLg="9" sizeMd="9" sizeXs="12" >
+            <ion-item >
+              <b>  Documents </b>
+             </ion-item>
+            </ion-col>  
+      </ion-row>
+    
+        <ion-item *ngFor="let item of files" >
+          <ion-label > 
+            <div style="padding-top:5px;"> 
+            <img src="../assets/icon/pdf.png"  >  
+            {{item.title}} du {{item.created_at| date: 'dd/MM/yyyy H:m'}}</div>
+          </ion-label> 
+    
+          <div class="item-note" slot="end">
+            <ion-button ion-button item-end large color="danger"  target="_blank" href="https://api.alpes-solutech.fr/pdf/{{item.url}}">Télécharger 
+              <ion-icon  ios="download-outline" md="download-outline" ></ion-icon></ion-button>
+          </div>
+      
+        </ion-item>
+      
+    </ion-list>
+
+
+
+
+<ion-list style="margin-top: 20px;" *ngIf="client"  >
+  <ion-item  *ngFor="let item of posts" >
+    Mise à jour | le {{item.updated_at| date: 'dd/MM/yyyy'}}
+  </ion-item>
+</ion-list>
+
+</ion-col>  
+
+<ion-col sizeLg="4" sizeMd="4" sizeXs="12" >
+</ion-col>
+</ion-row>
+</ion-content>
+
+
+
+<ion-modal trigger="open-modal1"  style="padding-top: 200px;" >
+  <ng-template>
+    <ion-header>
+      <ion-toolbar>
+        <ion-buttons slot="start">
+     
+        </ion-buttons>
+        <ion-title> Ajouter une demande d'intervention </ion-title>
+        <ion-buttons slot="end" color="primary">
+          <ion-button (click)="cancel()"> Annuler </ion-button>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content class="ion-padding">
+      <ion-list no-border>
+
+        <ion-item class="border">
+
+            <ion-list>
+              <ion-datetime [(ngModel)]="datestart"
+              minuteValues="0,15,30,45" color="success" 
+            ></ion-datetime>
+            </ion-list>
+      </ion-item>
+
+          <ion-item>
+            <ion-label position="floating"> Description </ion-label>
+            <ion-textarea rows="4" name="content" type="text" placeholder="Ajoutez un commentaire sur la demande ...." minlength="10"
+              [(ngModel)]="content" required>
+            </ion-textarea>
+          </ion-item>
+
+          <ion-list  *ngFor="let item of userstech" >
+            <ion-item *ngIf="iduserselected==item.id" class="selectitem">
+               <b> {{item.firstname }}  {{item.lastname }} </b> 
+               <div class="item-note" slot="end">
+              {{item.distance.toFixed(2) }} km <ion-icon name="navigate-circle-outline"></ion-icon>
+            </div>
+          </ion-item>
+
+          <ion-item *ngIf="iduserselected!==item.id" >
+            <b> {{item.firstname }}  {{item.lastname }} </b> 
+            <div class="item-note" slot="end">
+           {{item.distance.toFixed(2) }} km <ion-icon name="navigate-circle-outline"></ion-icon>
+         </div>
+       </ion-item>
+        </ion-list>
+
+        <ion-button size="success" *ngIf="iduserselected!==null" expand="full" shape="round" color="success" type="submit"  (click)="doSaveSelected()"> Enregistrer </ion-button>
+     
+
+        <ion-button size="success" *ngIf="iduserselected==null"  expand="full" shape="round" color="success" type="submit"  (click)="searchTech()"> Recherche du technicien le plus proche </ion-button>
+
+        <div style="padding-top: 30px;">
+        <ion-button size="light" *ngIf="iduserselected==null" expand="full" shape="round" color="medium" type="submit"  (click)="doSave()"> Enregistrer sans attribution </ion-button>
+        </div>
+
+      </ion-list>
+    </ion-content>
+  </ng-template>
+</ion-modal>

@@ -1,0 +1,68 @@
+<ion-header>
+  <ion-toolbar color="secondary">
+    <ion-title >
+     Mon groupe de passage
+     </ion-title>
+     <ion-buttons slot="end" style="display: none;">
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content responsive-sm  color="tertiary">
+  <ion-row>
+   
+<ion-col sizeLg="3" sizeMd="3" sizeXs="12" >
+</ion-col> 
+  
+<ion-col sizeLg="6" sizeMd="6" sizeXs="12" >
+<ion-grid>
+        <ion-list >
+
+          <p style="padding: 3%;color: black;">   
+            Mon Groupe de Passage sur les Ateliers: {{category}} <br>
+            Les Groupes de Passage sont
+            déterminés selon votre zone
+            géographique. Les groupes vont de salles en salles, dans le sens de
+            circulation des salles (sens des aiguilles d'une montre).
+          </p>
+
+            <ion-col size-xl="12" size-md="12" size-xs="12">
+              <ion-searchbar type="text"  placeholder="nom, prénom, entreprise, email" debounce="200"  [(ngModel)]="filter" (ionChange)="handleChange($event)"></ion-searchbar>
+            </ion-col>
+      
+          <ion-item button *ngFor="let item of posts" >
+            <ion-avatar slot="start"  [ngStyle]="{'background-color': item.color}" style="padding:3px"  >
+              <img  src="{{item.user_avatar}}">
+            </ion-avatar>
+          
+            <ion-label (click)="edit($event, item)">
+              <ion-text>
+                <h2><b> {{item.firstname}} {{item.lastname}}</b> <br>
+                {{item.company}} ( {{item.cp}}) </h2>
+              </ion-text>
+            </ion-label>
+
+            <ion-button  slot="end">    Groupe {{item.category}}  </ion-button>
+
+          </ion-item>
+        </ion-list>
+       
+        <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+          <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Chargement..."> </ion-infinite-scroll-content>
+        </ion-infinite-scroll>
+
+</ion-grid>
+</ion-col> 
+
+<ion-col sizeLg="3" sizeMd="3" sizeXs="12" >
+</ion-col> 
+</ion-row>
+
+
+  </ion-content>
+
+
+
+
+
+

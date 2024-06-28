@@ -1,0 +1,61 @@
+<ion-header color="primary" >
+  <ion-toolbar color="primary" >
+    <ion-buttons slot="start">
+      <ion-back-button [routerLink]="['/tabs/chat']"></ion-back-button>
+    </ion-buttons>
+    <ion-title >
+   Nouveau message
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content color="light">
+
+
+  <ion-grid>
+    <ion-row color="primary" class="ion-justify-content-center">
+
+      <ion-col size-md="6" size-lg="4" size-xs="12">
+      </ion-col>
+
+      <ion-col align-self-center size-md="6" size-lg="4" size-xs="12">
+        <ion-list no-border>
+          <ion-card >
+            <ion-card-content>
+              Envoyer un message à : 
+              <b> {{firstname}} {{lastname}} </b> 
+            </ion-card-content>
+          </ion-card>
+
+          <form #form="ngForm" >
+
+     
+            <ion-item>
+              <ion-label position="floating"> Message </ion-label>
+              <ion-textarea rows="4" name="content" type="text" placeholder="Votre message ici" minlength="10"
+                [(ngModel)]="content" required>
+              </ion-textarea>
+            </ion-item>
+          </form>
+
+          <ion-item style="display: none;">
+            <ion-buttons slot="start">
+              <ion-button >
+                <ion-icon slot="icon-only" name="attach"></ion-icon>
+              </ion-button>
+            </ion-buttons>
+            <input type="file" (change)="onFileChange($event)" />
+          </ion-item>
+
+          
+          
+          <ion-button size="medium" expand="full" shape="round" color="primary" type="submit" [disabled]="form.invalid" (click)="sendMessage()" > Envoyer </ion-button>
+        </ion-list>
+      </ion-col>
+      <ion-col size-md="6" size-lg="4" size-xs="12">
+      </ion-col>
+
+    </ion-row>
+  </ion-grid>
+
+
+</ion-content>

@@ -1,0 +1,158 @@
+<ion-header>
+  <ion-toolbar color="secondary">
+    <ion-buttons slot="start">
+      <ion-menu-button ></ion-menu-button>
+    </ion-buttons>
+    <ion-title >
+    Admins
+     </ion-title>
+     <ion-buttons slot="end">
+      <ion-button style="display: none;" [routerLink]="['/register']" ><ion-icon name="add-circle"></ion-icon> Ajouter un client </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+
+  <ion-content>
+    <ion-grid>
+      <ion-row style="background-color: #E4E4E4; border-radius: 10px;">
+        <ion-col size-xl="8" size-md="6" size-xs="12">
+          <ion-searchbar type="text"  placeholder="id, nom, prénom, entreprise, email" debounce="200"  [(ngModel)]="filter" (ionChange)="handleChange($event)"></ion-searchbar>
+        </ion-col>
+
+        <ion-col size-xl="4" size-md="6" size-xs="12" style="padding-top:12px;">
+          <ion-button color="light" (click)="reset()"> <ion-icon name="refresh-outline"></ion-icon> </ion-button>
+          <ion-button  color="light" >   Nombre de résultats : <b>{{total}}</b></ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+    <ion-list>
+      <ion-item button *ngFor="let item of posts" >
+        <ion-avatar slot="start"  [ngStyle]="{'background-color': item.color}" style="padding:3px"  >
+          <img  src="{{item.user_avatar}}">
+        </ion-avatar>
+
+        <ion-label (click)="edit($event, item)">
+          <ion-text>
+            <small> ID {{item.id}}</small>
+            <h2><b> {{item.lastname}} {{item.firstname}}  </b></h2>
+          </ion-text>
+        </ion-label>
+
+
+        <ion-label (click)="edit($event, item)" class="ion-hide-sm-down">
+          <ion-text>
+            <h2>{{item.email}}  </h2>
+          </ion-text>
+        </ion-label>
+
+        <ion-label (click)="edit($event, item)" class="ion-hide-sm-down">
+          <ion-badge color="success" slot="end"> {{item.category}} </ion-badge>
+        </ion-label>
+        
+        <ion-label class="ion-hide-sm-down" (click)="edit($event, item)" >
+          <ion-badge color="medium" slot="end">  {{item.session_id}} </ion-badge>
+        </ion-label>
+
+        <ion-label (click)="edit($event, item)" class="ion-hide-sm-down">
+          <ion-badge color="danger" slot="end" *ngIf="item.role==1">  Client </ion-badge>
+          <ion-badge color="success" slot="end" *ngIf="item.role==3"> Admin </ion-badge>
+          <ion-badge color="light" slot="end" *ngIf="item.role==4"> Fournissseur </ion-badge>
+        </ion-label>
+
+
+
+
+        <ion-button ion-button outline item-end small color="light" (click)="delete($event, item)"><ion-icon name="trash-outline"></ion-icon></ion-button>
+      </ion-item>
+    </ion-list>
+   
+    <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+      <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Chargement..."> </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+  </ion-content>
+
+
+  <ion-modal trigger="open-modal-register-customer" (willDismiss)="onWillDismiss($event)">
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+          <ion-buttons slot="start">
+       
+          </ion-buttons>
+          <ion-title> Ajouter </ion-title>
+          <ion-buttons slot="end" color="primary">
+            <ion-button (click)="modal.dismiss()"> Annuler </ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+
+
+      <ion-content class="ion-padding">
+        <form [formGroup]="validations_form"  (ngSubmit)="doSave()" novalidate class="list-form">
+          <ion-item >
+              <ion-label  position="floating"  > 
+                  <ion-icon name="person" item-start></ion-icon>
+                   Prénom *
+              </ion-label>
+              <ion-input type="text" [(ngModel)]="firstname" formControlName="firstname"></ion-input>
+            </ion-item>
+
+        <ion-item class="border">
+            <ion-label  position="floating"  > 
+                <ion-icon name="person" item-start></ion-icon>
+                 Nom *
+            </ion-label>
+              <ion-input type="text" [(ngModel)]="lastname" formControlName="lastname"></ion-input>
+            </ion-item>
+        
+            <ion-item class="border">
+              <ion-label  position="floating"  > 
+                  <ion-icon name="at" item-start></ion-icon>
+                   Email *
+              </ion-label>
+            <ion-input  type="email" [(ngModel)]="email" formControlName="email"></ion-input>
+          </ion-item>
+   
+           </form>
+
+           <ion-item >
+            <ion-label  position="floating"  > 
+                <ion-icon name="person" item-start></ion-icon>
+                Nom entreprise 
+            </ion-label>
+            <ion-input type="text" [(ngModel)]="company" ></ion-input>
+          </ion-item>
+
+           <ion-item>
+            <ion-label  position="stacked"> Adresse  </ion-label>
+           <ion-input  inputmode="text"  placeholder="Adresse" [(ngModel)]="address"></ion-input>
+          </ion-item>
+          
+          <ion-item>
+            <ion-label  position="stacked"> CP  </ion-label>
+           <ion-input  inputmode="text"  placeholder="CP" [(ngModel)]="cp"></ion-input>
+          </ion-item>
+           <ion-item>
+              <ion-label position="stacked"> Ville </ion-label>
+             <ion-input  inputmode="text"  placeholder="Ville" [(ngModel)]="city"></ion-input>
+           </ion-item>
+          
+           <ion-item>
+              <ion-label position="stacked">Téléphone</ion-label>
+             <ion-input inputmode="text"  placeholder="Téléphone" [(ngModel)]="phone"></ion-input>
+           </ion-item>
+      
+           <p> L'utilisateur va reçevoir un mot de passe provisoire.</p>
+           <ion-button expand="block"  color="danger"  (click)="doSave()" [disabled]="!validations_form.value">Enregister</ion-button>
+          
+          
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+
+
+
+
+

@@ -1,0 +1,28 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Signature de {{firstname}} {{lastname}}</ion-title>
+  </ion-toolbar>
+   <ion-buttons slot="start">
+    <ion-button class="btn btn-block btn-warning"  (click)="closeModal()">Fermer</ion-button>
+    </ion-buttons>
+</ion-header>
+<ion-content   class="ion-padding">
+
+    <ion-col size="6" >
+        <h5 class="text-center">Ajouter la signature  </h5>
+        <div class="signature-pad">
+          <div class="signature-pad--body">
+            <canvas #sPad width="300" height="200" ></canvas>
+          </div>
+        </div>
+        <br>
+        <br>
+        <div class="row">
+          <div class="col-12">
+          <ion-button class="btn btn-block btn-warning"  *ngIf="imgsign!==null" (click)="undo()">Annuler</ion-button>
+          <ion-button class="btn btn-block btn-secondary" (click)="savesign()">Enregistrer</ion-button>
+         </div>
+        </div>
+  </ion-col>
+ 
+</ion-content>

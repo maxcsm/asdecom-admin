@@ -1,0 +1,103 @@
+<ion-header>
+  <ion-toolbar color="primary" >
+    <ion-buttons slot="start">
+      <ion-back-button text="Mess." (click)="back()"></ion-back-button>
+    </ion-buttons>
+    <ion-title>
+    </ion-title>
+  </ion-toolbar>
+
+</ion-header>
+
+
+
+
+
+<ion-content [scrollEvents]="true" >  
+
+
+    <ion-refresher (ionRefresh)="doRefresh($event)"  slot="fixed">
+      <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
+    <ion-row justify-content-center>
+      <ion-col size-md="3" size-lg="3" size-xs="12">
+      </ion-col>
+  
+      <ion-col align-self-center size-md="6" size-lg="6" size-xs="12">
+  
+        <ion-list *ngFor="let message of posts let i = index;" style="padding-top: 3%;" style="padding-bottom: 10px;">
+  
+          <ion-item lines="none"  *ngIf="message.from_id==iduser"  href="{{message.path}}" target="_blank"  >
+            <div class="border-blue"  slot="end">
+            <img  src="{{message.user_avatar}}" width="40px" height="40px">
+            </div>
+            <ion-badge color="primary" slot="end" class="wrap-text">
+            {{message.body}} 
+            <ion-note color="primary" style="color: white;"> 
+                <div>
+                  <div *ngIf="message.thumb_path!==null" slot="start" >
+                    <img class="circular"   [ngStyle]="{ 'background-image': 'url('+message.path+ ')'}"  >
+                    {{message.name}}
+                  </div>
+                </div>
+              <b >Moi</b>  
+              <small> le <b>{{message.created_at| date: 'dd/MM/yyyy'}}</b> à <b> {{message.created_at| date:'HH:mm' }} </b> </small>
+            </ion-note>
+          </ion-badge>
+          </ion-item>
+    
+    
+          
+          <ion-item lines="none" [hidden]="iduser==message.from_id"  href="/{{message.path}}" target="_blank">
+            <div class="border-blue"  slot="start">
+              <img  src="{{message.user_avatar}}" width="40px" height="40px">
+              <small> {{message.firstname}} </small>
+              </div>
+            <ion-badge color="light" slot="start" class="wrap-text">
+              {{message.body}} 
+              <ion-note color="primary"> 
+              <div >
+                <div *ngIf="message.thumb_path!==null" slot="start" >
+                  <img class="circular"   [ngStyle]="{ 'background-image': 'url(/'+message.thumb_path+ ')'}"  >
+                  {{message.name}}
+                </div>
+              </div>
+              <small> le <b>{{message.created_at| date: 'dd/MM/yyyy'}}</b> à <b> {{message.created_at| date:'HH:mm' }} </b> </small>
+            </ion-note>
+          </ion-badge>
+          </ion-item>
+    
+      </ion-list>
+  
+      </ion-col>
+      <ion-col size-md="3" size-lg="3" size-xs="12">
+      </ion-col>
+    </ion-row>
+  </ion-content>
+  
+
+<ion-footer style="height: 200px">
+
+  <ion-item style="display: none;">
+    <ion-buttons slot="start">
+      <ion-button >
+        <ion-icon slot="icon-only" name="attach"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <input type="file" (change)="onFileChange($event)" />
+  </ion-item>
+
+  <ion-toolbar>
+    <ion-input type="text" placeholder="Message..." [(ngModel)]="chatBox" #messageInput ></ion-input>
+    <ion-buttons slot="end">
+      <ion-button button (click)="sendNewMessage(chatBox)" color="primary">
+        <ion-icon slot="icon-only" name="send"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-footer>
+
+
+
+
+

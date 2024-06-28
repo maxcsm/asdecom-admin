@@ -1,0 +1,41 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>emails</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+<ion-list>
+
+  <ion-row  style="padding-top: 20px;">
+    <ion-col size="6" padding >
+      <h1>Tâche 1 </h1>
+     Rappel e-mail au client si un contrôle doit avoir lieu dans 1 mois 
+     <ion-button size="success"  expand="full" shape="round" color="success" type="submit"  (click)="getEmail1()"> Envoyer </ion-button>
+     Nombre d'emails envoyés : {{posts1}}
+   </ion-col>
+  </ion-row>
+
+
+  <ion-row  style="padding-top: 20px;">
+    <ion-col size="6" padding >
+      <h1>Tâche 2 </h1>
+     Rappel e-mail au client si un contrôle doit avoir lieu dans 2 mois 
+     <ion-button size="success"  expand="full" shape="round" color="success" type="submit"  (click)="getEmail2()"> Envoyer </ion-button>
+     Nombre d'emails envoyés : {{posts2}}
+   </ion-col>
+  </ion-row>
+
+
+  <ion-row  style="padding-top: 20px;">
+    <ion-col size="6" padding >
+      <h1>Tâche 3 </h1>
+      Rappel e-mail si facture impayée
+     <ion-button size="success"  expand="full" shape="round" color="success" type="submit"  (click)="getEmail3()"> Envoyer </ion-button>
+     Nombre d'emails envoyés : {{posts3}}
+   </ion-col>
+  </ion-row>
+
+</ion-list>
+</ion-content>

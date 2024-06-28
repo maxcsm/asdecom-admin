@@ -1,0 +1,39 @@
+<ion-header [translucent]="false"  class="hidden-xs hidden-lg" >
+  <ion-toolbar mode="ios" color="secondary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title> Services de l'hôtel</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content >
+  <ion-row justify-content-center>
+    <ion-col size-md="3" size-lg="3" size-xs="12">
+    </ion-col>
+
+    <ion-col align-self-center size-md="6" size-lg="6" size-xs="12"> 
+      <ion-row *ngFor="let item of posts">
+          <ion-card style="background-color: white;color:black; width: 100%;"  >
+            <img  src="{{UrlImage}}images/{{item.image}}" *ngIf="item.image"  class='image-view' >
+            <ion-card-header style="background-color: white;color:black;">
+              <ion-card-title style="background-color: white;color:black;">{{item.title}}</ion-card-title>
+            </ion-card-header>
+            <ion-card-content class="ion-text-wrap">
+              <div [innerHTML]="item.content">
+              </div>
+              <b>{{item.subtitle}}</b>
+            </ion-card-content>
+          </ion-card>
+      </ion-row>
+      <ion-row>
+          <ion-card style="background-color: white;color:black;"  *ngFor="let item of gallery"  >
+            <img  src="{{UrlImage}}images/{{item.url}}" *ngIf="image"   >
+          </ion-card>
+      </ion-row>
+    </ion-col>
+    <ion-col size-md="3" size-lg="3" size-xs="12">
+    </ion-col>
+  </ion-row>
+</ion-content>

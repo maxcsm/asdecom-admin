@@ -1,0 +1,160 @@
+<ion-header>
+  <ion-toolbar color="secondary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title> Lieu </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content responsive-sm class="ion-padding">
+  <ion-row>
+    <ion-col sizeLg="8" sizeMd="8" sizeXs="12">
+      <ion-list lines="none">
+        <ion-row>
+          <ion-col sizeLg="6" sizeMd="6" sizeXs="12">
+            Id: {{id}} <br>
+          </ion-col>
+        </ion-row>
+
+        <ion-row >
+          <ion-col sizeLg="6" sizeMd="6" sizeXs="12" >
+            <select [(ngModel)]="view" >
+              <option value="0"> Brouillon </option>
+              <option value="1"> Publié </option>
+            </select>
+          </ion-col>
+          <ion-col sizeLg="6" sizeMd="6" sizeXs="12" >
+          </ion-col>
+        </ion-row>
+
+
+        <ion-row>
+          <ion-col sizeLg="12" sizeMd="12" sizeXs="12">
+            <ion-item class="roundedInput">
+              <ion-label position="stacked">Titre</ion-label>
+              <ion-input inputmode="text" [(ngModel)]="title" placeholder="Titre"> </ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+
+ 
+
+        <ion-row>
+          <ion-col sizeLg="12" sizeMd="12" sizeXs="12">
+            <ion-item class="roundedInput">
+              <ion-label position="stacked">Sous titre</ion-label>
+              <ion-input inputmode="text" [(ngModel)]="subtitle" placeholder="Sous titre"> </ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+
+
+        <ion-row style="display: none;">
+            <ion-col sizeLg="12" sizeMd="12" sizeXs="12">
+              <ion-item class="roundedInput">
+                <ion-label position="stacked">Ordre</ion-label>
+                <ion-input inputmode="text" [(ngModel)]="order" placeholder="1"> </ion-input>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+
+
+          <ion-row>
+            <ion-col sizeLg="12" sizeMd="12" sizeXs="12">
+              <ion-item class="roundedInput">
+                <ion-label position="stacked">Latitude</ion-label>
+                <ion-input inputmode="text" [(ngModel)]="lat" > </ion-input>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+  
+
+         <ion-row>
+            <ion-col sizeLg="12" sizeMd="12" sizeXs="12">
+              <ion-item class="roundedInput">
+                <ion-label position="stacked">Longitude</ion-label>
+                <ion-input inputmode="text" [(ngModel)]="lng" > </ion-input>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+  
+
+          <ion-row >
+            <ion-col sizeLg="12" sizeMd="12" sizeXs="12" > 
+              <ion-label  position="stacked"> <b>Contenu</b></ion-label>
+              <ion-item class="roundedInput">
+                <div [ngxSummernote]="config" [(ngModel)]="content"></div>
+              </ion-item>
+            </ion-col>
+           </ion-row>
+        
+
+
+
+
+
+        <ion-row *ngIf="category=='page'">
+          <ion-col sizeLg="8" sizeMd="8" sizeXs="12">
+            <h4> Ajouter une image </h4>
+            <ion-item>
+              <ion-buttons slot="start">
+                <ion-button>
+                  <ion-icon slot="icon-only" name="attach"></ion-icon>
+                </ion-button>
+              </ion-buttons>
+              <input type="file" (change)="onFileChange($event)" />
+            </ion-item>
+            <img src="{{UrlImage}}images/{{image}}" style="width:200px">
+          </ion-col>
+          <ion-col sizeLg="4" sizeMd="4" sizeXs="12">
+          </ion-col>
+        </ion-row>
+        
+        <ion-row *ngIf="category=='page'">
+          <ion-col sizeLg="12" sizeMd="12" sizeXs="12">
+            <ion-item class="roundedInput">
+              <ion-label position="stacked">Image </ion-label>
+              <ion-input inputmode="text" [(ngModel)]="image" placeholder=""> </ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+
+
+        <ion-item>
+          <div class="item-note" slot="end">
+            <ion-button color="light" size="medium" (click)="doCancel()" >Annuler </ion-button>
+            <ion-button color="secondary" size="medium" (click)="doSave()">Enregistrer</ion-button>
+          </div>
+        </ion-item>
+      </ion-list>
+
+
+      <ion-list style="margin-top: 20px;"   style="display: none;">
+          <ion-row>
+            <ion-col sizeLg="8" sizeMd="8" sizeXs="12">
+              <h4> Ajouter une image dans la gallerie</h4>
+              <ion-item>
+                <ion-buttons slot="start">
+                  <ion-button>
+                    <ion-icon slot="icon-only" name="attach"></ion-icon>
+                  </ion-button>
+                </ion-buttons>
+                <input type="file" (change)="onFileChangeGallery($event)" />
+              </ion-item>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-item  *ngFor="let item of gallery" style="margin-top: 10px;">
+                <img src="{{UrlImage}}images/{{item.url}}">
+                <ion-button ion-button outline item-end small color="light" (click)="delete($event, item)"><ion-icon
+                  name="trash-outline"></ion-icon></ion-button>
+            </ion-item>
+          </ion-row>
+        </ion-list>
+    </ion-col>
+    <ion-col sizeLg="4" sizeMd="4" sizeXs="12" class="padding">
+    </ion-col>
+  </ion-row>
+</ion-content>

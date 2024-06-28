@@ -1,0 +1,105 @@
+<ion-header [translucent]="false"  class="hidden-xs hidden-lg" >
+  <ion-toolbar mode="ios" color="secondary">
+    <ion-buttons slot="start">
+      <ion-menu-button  ></ion-menu-button>
+    </ion-buttons>
+    <ion-title slot="start"  >
+      Developpeur fullstack
+    </ion-title>
+    <ion-buttons slot="primary"  class="hidden-sm-down">
+      <ion-button   routerLink="/public-posts">
+        Réalisations
+       </ion-button>
+      <ion-button routerLink="/solutions-developpement">
+        Solutions
+       </ion-button>
+       <ion-button  routerLink="/demande-devis">
+       Devis
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+
+
+
+<ion-content >
+  <ion-row justify-content-center>
+    <ion-col size-md="3" size-lg="3" size-xs="12">
+    </ion-col>
+
+    <ion-col align-self-center size-md="6" size-lg="6" size-xs="12">
+ 
+
+      <ion-row style="padding-left: 1%;padding-bottom: 2%;">
+        <ion-col size-md="12" size-lg="12" size-xs="12">
+          <strong>
+            <h2> Solutions</h2>
+          </strong>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col sizeLg="12" sizeMd="12" sizeXs="12" *ngFor="let item of posts">
+     
+
+          <ion-item (click)="post($event, item)" >
+            <ion-thumbnail slot="start">
+              <img  src="{{UrlImage}}images/{{item.image}}" *ngIf="item.image"  class='image-view' >
+            </ion-thumbnail>
+            <div class="ion-text-wrap">
+              <b>  {{item.title}}</b> <br>
+              {{item.subtitle}}
+            </div>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
+
+  
+      <ion-row justify-content-center>
+          <ion-card
+            style="background-color: white;color:black;padding: 8%;">
+           <h2>IOS / ANDROID /PWA</h2>
+           <h6>
+            Développemement de solutions digitales web et mobiles sur mesure. Découvrez maintenant les dernnières réalisations </h6>
+            <ion-button class="ion-button-block-outline icon-only" shape="round" fill="outline" color="transparent"
+            href="/public-posts">
+              Voir toutes les réalisations
+            </ion-button>
+          </ion-card>
+      </ion-row>
+
+
+      <ion-row>
+        <ion-col align-self-center size-md="12" size-lg="12" size-xs="12"
+          style="text-align: center;color:rgb(122, 122, 122); padding: 8%;">
+          <ion-button style="color:rgb(94, 92, 92)" class="ion-button-block-outline icon-only" fill=""
+            class="ion-float-center" href="https://www.linkedin.com/in/maxime-buisson-a9578563/" target="blank_">
+            linkedin
+            <ion-icon name="logo-linkedin" class="ion-float-right" style="color:rgb(94, 92, 92)"></ion-icon>
+          </ion-button>
+
+          <ion-button style="color:rgb(94, 92, 92)" class="ion-button-block-outline icon-only" fill=""
+            color="transparent" class="ion-float-center"
+            href="https://api.whatsapp.com/send?phone=769158421&text=Bonjour,%20quel%20est%20projet%20d'application%20?"
+            target="blank_">
+            whatsapp <ion-icon name="logo-whatsapp"></ion-icon>
+            <ion-icon name="whatsapp" class="ion-float-right" style="color:rgb(146, 146, 146)"></ion-icon>
+          </ion-button>
+
+          <ion-button style="color:rgb(94, 92, 92)" class="ion-button-block-outline icon-only" fill=""
+            color="transparent" class="ion-float-center" href="https://www.instagram.com/alpes_solutech/"
+            target="blank_">
+            instagram <ion-icon name="logo-instagram"></ion-icon>
+            <ion-icon name="whatsapp" class="ion-float-right" style="color:rgb(146, 146, 146)"></ion-icon>
+          </ion-button>
+          <p class="small-text">Alpes Solutech - Siret 53228698600023 - Lyon </p>
+        </ion-col>
+      </ion-row>
+
+    </ion-col>
+    <ion-col size-md="3" size-lg="3" size-xs="12">
+    </ion-col>
+  </ion-row>
+</ion-content>

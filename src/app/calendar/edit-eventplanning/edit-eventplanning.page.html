@@ -1,0 +1,106 @@
+<ion-header>
+  <ion-toolbar color="light">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title> Formation</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content responsive-sm color="light" >
+
+  <ion-grid fixed >
+    <ion-row *ngIf="edit==false">
+      <ion-col col-12 col-md-12 padding>
+        <ion-item-divider color="light">
+          <ion-label no-lines>
+            <b>Description</b>
+          </ion-label>
+
+          <div class="item-note" slot="end">
+            <ion-button ion-button item-end small color="primary" (click)="editpage()"><ion-icon ios="ios-brush" md="md-brush"></ion-icon></ion-button>
+          </div>
+        </ion-item-divider>
+
+
+        <ion-list lines="none">
+          <ion-item *ngFor="let item of posts" >
+            <ion-label  class="ion-text-wrap" >
+              <h2> <b> {{item.trainingName}}</b></h2>
+              <p>{{item.trainingDescription}}</p>
+              <p>{{item.duration}} min </p> 
+              <p> <ion-button   slot="end" size="small" shape="round" color="light"> {{item.parcourType}} </ion-button></p>
+            </ion-label>
+          </ion-item>
+       </ion-list>
+
+    
+
+  </ion-col>
+</ion-row>
+
+    <ion-row *ngIf="edit==true">
+      <ion-col col-12 col-md-12 padding>
+        <ion-item-divider color="light">
+          <ion-label no-lines>
+            <b>Description</b>
+          </ion-label>
+
+          <div class="item-note" slot="end">
+            <ion-button ion-button item-end small color="primary" (click)="editpage()">annuler</ion-button>
+          </div>
+        </ion-item-divider>
+
+        
+        <ion-item>
+          <ion-label color="dark" position="stacked">Titre</ion-label>
+          <ion-input inputmode="text" [(ngModel)]="title"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label color="dark" position="stacked">Description </ion-label>
+          <ion-textarea maxlength="300" rows="4" inputmode="text" [(ngModel)]="content"></ion-textarea>
+        </ion-item>
+
+        <ion-item>
+          <ion-label color="dark" position="stacked">Durée</ion-label>
+          <ion-input inputmode="text" [(ngModel)]="duration"></ion-input>
+        </ion-item>
+
+
+        <ion-button expand="full" shape="round" expand="full" (click)="doSave()">Enregister</ion-button>
+
+      </ion-col>
+    </ion-row>
+
+
+    <ion-row color="primary">
+
+      <ion-col col-12 col-md-6 padding>
+        <ion-item-divider color="light">
+          <ion-label no-lines>
+           <b>Evènement(s)</b>
+          </ion-label>
+        </ion-item-divider>
+        <ion-list >
+        <ion-item *ngFor="let item of events">
+          <ion-label  class="ion-text-wrap" >
+          <h2> <b>{{item.dayHourEvent | date: 'dd/MM/yyyy  hh:mm:ss' }}</b></h2>
+          <p> <b> Lien formation : </b> {{item.zoomTrainerLink}} </p>
+          <p> <b>Lien utilisateur: </b>  {{item.zoomUserLink}} </p>
+          <p> <b>Mot de passe : </b> {{item.zoomPassword}} </p>
+        </ion-label>
+        </ion-item>
+      </ion-list>
+
+      </ion-col>
+
+   
+
+    </ion-row>
+  
+  
+
+  </ion-grid>
+
+</ion-content>

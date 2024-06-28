@@ -1,0 +1,66 @@
+<ion-header>
+  <ion-toolbar color="secondary">
+    <ion-buttons slot="start">
+      <ion-menu-button ></ion-menu-button>
+    </ion-buttons>
+    <ion-title >
+    Pages
+     </ion-title>
+     <ion-buttons slot="end" style="display: none;">
+      <ion-button  id="open-modal-new-post" ><ion-icon name="add-circle"></ion-icon> Ajouter  </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+
+  <ion-content>
+    <ion-grid>
+      <ion-row style="background-color: #E4E4E4; border-radius: 10px;">
+        <ion-col size-xl="8" size-md="6" size-xs="12">
+          <ion-searchbar type="text"  placeholder="Rechercher..." debounce="200"  [(ngModel)]="filter" (ionChange)="handleChange($event)"></ion-searchbar>
+        </ion-col>
+
+        <ion-col size-xl="4" size-md="6" size-xs="12" style="padding-top:12px;">
+          <ion-button color="light" (click)="reset()"> <ion-icon name="refresh-outline"></ion-icon> </ion-button>
+          <ion-button  color="light" >   Nombre de résultats : <b>{{total}}</b></ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+    <ion-list>
+      <ion-item button *ngFor="let item of posts" >
+  
+        <ion-thumbnail slot="start">
+          <img  src="{{UrlImage}}images/{{item.image}}" *ngIf="item.image"  >
+        </ion-thumbnail>
+
+        <ion-label (click)="edit($event, item)">
+          <ion-text>
+            <small> ID {{item.id}}</small>
+            <h2><b> {{item.title}}  </b></h2>
+          </ion-text>
+        </ion-label>
+
+
+
+
+
+        <ion-label (click)="edit($event, item)" class="ion-hide-sm-down">
+          <ion-badge color="success" slot="end" *ngIf="item.view==1"> Publié </ion-badge>
+          <ion-badge color="light" slot="end" *ngIf="item.view==0"> Brouillion </ion-badge>
+        </ion-label>
+
+
+
+        
+      </ion-item>
+    </ion-list>
+   
+    <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+      <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Chargement..."> </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+  </ion-content>
+
+
+
+

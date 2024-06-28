@@ -1,0 +1,76 @@
+
+.divider-blue {
+    
+    height: 100px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    background-color: #00BCD4;
+    padding-top: 20px;
+    text-align: center;
+   }
+  
+
+
+.list-md {
+    padding-top: 20px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+    box-shadow:1px 1px 1px 2px rgb(215, 215, 215);
+  }
+
+
+  .selectitem {
+    --border-top-width: 2px;
+    --border-end-width: 3px;
+    --border-bottom-width: 2px;
+    --border-start-width: 6px;
+    
+    --inner-border-width: 0;
+    
+    --border-width: var(--border-top-width) var(--border-end-width) var(--border-bottom-width) var(--border-start-width);
+    --border-color: rgb(63, 187, 59);
+  }
+
+   ion-row {
+   ion-col {
+     ion-list {
+       
+      .roundedInput  {
+       
+        --border-color: gray;
+        --border-radius: 5px;
+        --border-width: 2px;
+        --box-shadow: 2px gray;
+        --highlight-height: 0;
+        --background: #f8f9fa;
+        padding-right: 10px;
+       }
+
+   
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+        border-bottom-right-radius: 10px;
+        border-bottom-left-radius: 10px;
+
+    }
+  }
+}
+
+
+ion-button {
+   text-transform:capitalize; 
+}
+
+
+.img-box {
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  overflow: hidden;
+  text-align: center;
+  padding: 5px;
+}

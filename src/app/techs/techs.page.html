@@ -1,0 +1,143 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+     Techniciens
+    </ion-title>
+    <ion-buttons slot="end" >
+      <ion-button id="open-modal-tech" color="primary"><ion-icon name="add-circle"></ion-icon></ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-content>
+
+
+
+    <ion-grid>
+      <ion-row style="background-color: #E4E4E4; border-radius: 10px;">
+        <ion-col size-xl="8" size-md="6" size-xs="12">
+         
+        </ion-col>
+
+        <ion-col size-xl="4" size-md="6" size-xs="12" style="padding-top:12px;">
+          <ion-button color="primary" (click)="reset()"> <ion-icon name="refresh-outline"></ion-icon> </ion-button>
+          <ion-button  color="primary" >   Nombre de résultats : <b>{{total}}</b></ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+    <ion-list>
+      <ion-item button *ngFor="let item of posts" (click)="edit($event, item)">
+        <ion-avatar slot="start">
+          <ion-icon name="person-circle-outline"></ion-icon>
+        </ion-avatar>
+
+
+        <ion-label>
+          <ion-text>
+            <h2>{{item.firstname}}  {{item.lastname}}</h2>
+            <p>{{item.phone_number}}</p>
+          </ion-text>
+        </ion-label>
+   
+        <ion-label class="ion-text-wrap">
+          <h3>{{item.city}}</h3>
+          <p>{{ item.created_at | date:'dd-MM-YYYY' }}</p>
+        </ion-label>
+   
+        <ion-badge slot="end">  Technicien </ion-badge>
+      </ion-item>
+    </ion-list>
+   
+    <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+      <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Chargement..."> </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+  </ion-content>
+
+
+  <ion-modal trigger="open-modal-tech" (willDismiss)="onWillDismiss($event)">
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+          <ion-buttons slot="start">
+       
+          </ion-buttons>
+          <ion-title> Ajouter </ion-title>
+          <ion-buttons slot="end" color="primary">
+            <ion-button (click)="modal.dismiss()"> Annuler </ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+
+
+      <ion-content class="ion-padding">
+
+
+        <form [formGroup]="validations_form"  (ngSubmit)="doSave()" novalidate class="list-form">
+
+          <ion-item >
+              <ion-label  position="floating"  > 
+                  <ion-icon name="person" item-start></ion-icon>
+                   Prénom *
+              </ion-label>
+              <ion-input type="text" [(ngModel)]="firstname" formControlName="firstname"></ion-input>
+            </ion-item>
+
+        <ion-item class="border">
+            <ion-label  position="floating"  > 
+                <ion-icon name="person" item-start></ion-icon>
+                 Nom *
+            </ion-label>
+              <ion-input type="text" [(ngModel)]="lastname" formControlName="lastname"></ion-input>
+            </ion-item>
+        
+            <ion-item class="border">
+              <ion-label  position="floating"  > 
+                  <ion-icon name="at" item-start></ion-icon>
+                   Email *
+              </ion-label>
+            <ion-input  type="email" [(ngModel)]="email" formControlName="email"></ion-input>
+          </ion-item>
+   
+           </form>
+
+           <ion-item>
+            <ion-label  position="stacked"> Adresse  </ion-label>
+           <ion-input  inputmode="text"  placeholder="Adresse" [(ngModel)]="address"></ion-input>
+          </ion-item>
+          
+          <ion-item>
+            <ion-label  position="stacked"> CP  </ion-label>
+           <ion-input  inputmode="text"  placeholder="CP" [(ngModel)]="cp"></ion-input>
+          </ion-item>
+           <ion-item>
+              <ion-label position="stacked"> Ville </ion-label>
+             <ion-input  inputmode="text"  placeholder="Ville" [(ngModel)]="city"></ion-input>
+           </ion-item>
+          
+           <ion-item>
+              <ion-label position="stacked">Téléphone</ion-label>
+             <ion-input inputmode="text"  placeholder="Téléphone" [(ngModel)]="phone"></ion-input>
+           </ion-item>
+      
+
+         
+           <p> L'utilisateur va reçevoir un mot de passe provisoire.</p>
+           <ion-button expand="block"  color="danger"  (click)="doSave()" [disabled]="!validations_form.value">Enregister</ion-button>
+          
+           
+     
+     
+      
+       
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+
+
+</ion-content>
+

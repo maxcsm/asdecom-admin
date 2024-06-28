@@ -1,0 +1,115 @@
+<ion-header>
+  <ion-toolbar color="secondary">
+    <ion-buttons slot="start">
+      <ion-menu-button ></ion-menu-button>
+    </ion-buttons>
+    <ion-title >
+     Actualités
+     </ion-title>
+     <ion-buttons slot="end" >
+      <ion-button  id="open-modal-new" ><ion-icon name="add-circle"></ion-icon> Ajouter  </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+
+  <ion-content>
+    <ion-grid>
+      <ion-row style="background-color: #E4E4E4; border-radius: 10px;">
+        <ion-col size-xl="8" size-md="6" size-xs="12">
+          <ion-searchbar type="text"  placeholder="Rechercher..." debounce="200"  [(ngModel)]="filter" (ionChange)="handleChange($event)"></ion-searchbar>
+        </ion-col>
+
+        <ion-col size-xl="4" size-md="6" size-xs="12" style="padding-top:12px;">
+          <ion-button color="light" (click)="reset()"> <ion-icon name="refresh-outline"></ion-icon> </ion-button>
+          <ion-button  color="light" >   Nombre de résultats : <b>{{total}}</b></ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+    <ion-list>
+      <ion-item button *ngFor="let item of posts" >
+  
+        <ion-label (click)="edit($event, item)">
+          <ion-text>
+            <small> ID {{item.id}}</small>
+            <h2><b> {{item.title}}  </b></h2>
+          </ion-text>
+        </ion-label>
+
+
+        <ion-label (click)="edit($event, item)" class="ion-hide-sm-down">
+          <ion-text>
+            <h2>{{item.email}}  </h2>
+          </ion-text>
+        </ion-label>
+
+        <ion-label (click)="edit($event, item)" class="ion-hide-sm-down">
+          <ion-badge color="success" slot="end" > {{item.category}} </ion-badge>
+        </ion-label>
+
+
+        <ion-label (click)="edit($event, item)" class="ion-hide-sm-down">
+          <ion-badge color="success" slot="end" *ngIf="item.view==1"> Publié </ion-badge>
+          <ion-badge color="light" slot="end" *ngIf="item.view==0"> Brouillion </ion-badge>
+        </ion-label>
+
+
+
+        <ion-button ion-button outline item-end small color="light" (click)="delete($event, item)"><ion-icon name="trash-outline"></ion-icon></ion-button>
+      </ion-item>
+    </ion-list>
+   
+    <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+      <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Chargement..."> </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+  </ion-content>
+
+
+  <ion-modal trigger="open-modal-new" (willDismiss)="onWillDismiss($event)">
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+          <ion-buttons slot="start">
+       
+          </ion-buttons>
+          <ion-title> Ajouter </ion-title>
+          <ion-buttons slot="end" color="primary">
+            <ion-button (click)="modal.dismiss()"> Annuler </ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+
+
+      <ion-content class="ion-padding">
+         <form [formGroup]="validations_form"  (ngSubmit)="doSave()" novalidate class="list-form">
+
+
+           <ion-item class="roundedInput">
+              <ion-label  position="floating"  > 
+                  <ion-icon name="person" item-start></ion-icon>
+                   titre *
+              </ion-label>
+              <ion-input type="text" [(ngModel)]="title" formControlName="title"></ion-input>
+            </ion-item>   
+
+
+              <ion-item class="roundedInput" style="padding-top: 30px;">
+                <ion-label position="stacked"> <ion-icon name="chatbox-ellipses" item-start></ion-icon>
+                  description *
+                </ion-label>
+                <ion-textarea placeholder="Ajoutez une description ..." [autoGrow]="true" [(ngModel)]="content" formControlName="content">
+                </ion-textarea>
+              </ion-item>
+ 
+
+
+           </form>
+           <ion-button expand="block"  color="secondary"  (click)="doSave()" [disabled]="!validations_form.value">Enregister</ion-button>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+
+
+
+

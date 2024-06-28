@@ -1,0 +1,56 @@
+<ion-header style="background-color: #E4E4E4;">
+  <ion-toolbar >
+    <ion-title >
+    Tous les participants
+     </ion-title>
+     <ion-buttons slot="end" >
+      <ion-button color="primary" (click)="closeModal()"><ion-icon name="close-circle"></ion-icon></ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+
+  <ion-content >
+  
+    <ion-row style="background-color: #E4E4E4;">
+    <ion-searchbar type="text"  placeholder="prénom, nom, entreprise" debounce="200"  [(ngModel)]="filter" (ionChange)="handleChange($event)"></ion-searchbar>
+    </ion-row>
+
+
+    <ion-list>
+      <ion-item-group *ngFor="let item of outputalphabet" >
+        <ion-item-divider color="tertiary">
+          <ion-label> {{item.alphabet}}  </ion-label>
+        </ion-item-divider>
+
+        <ion-item *ngFor="let item2 of item.record"  >
+            <ion-avatar slot="start"  [ngStyle]="{'background-color': item2.color}" style="padding:3px"  >
+              <img  src="{{item2.user_avatar}}">
+            </ion-avatar>
+            <ion-label >
+              <ion-text>
+                <h2><b>{{item2.firstname}} {{item2.lastname}}</b> <br>
+                {{item2.customer_type}}<br>
+                {{item2.company}}, {{item2.centre_regionale}} </h2>
+                <ion-button type="submit" color="primary" size="small" *ngIf="item2.id!==iduser" (click)="view($event, item2)" > 
+                  <ion-icon name="chatbubbles-outline"></ion-icon>
+                  Envoyer un message
+                </ion-button>
+              </ion-text>
+            </ion-label>
+            <ion-button    slot="end" > Groupe {{item2.category}}  </ion-button>
+          </ion-item>
+      
+
+
+      </ion-item-group>
+    </ion-list>
+   
+    <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+      <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Chargement..."> </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+  </ion-content>
+
+
+
+

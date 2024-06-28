@@ -1,0 +1,121 @@
+<ion-header>
+  <ion-toolbar color="secondary">
+   <ion-buttons slot="start">
+    <ion-menu-button ></ion-menu-button>
+    </ion-buttons>
+    <ion-title >
+      Produits
+     </ion-title>
+     <ion-buttons slot="end" style="display: none;" >
+      <ion-button  id="open-addproduct" ><ion-icon name="add-circle"></ion-icon> Ajouter  </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+
+
+<ion-content>
+  <ion-content>
+    <ion-grid>
+      <ion-row style="background-color: #E4E4E4; border-radius: 10px;">
+        <ion-col size-xl="8" size-md="6" size-xs="12">
+          <ion-searchbar type="text"  placeholder="Rechercher un produit" debounce="200"  [(ngModel)]="filter" (ionChange)="handleChange($event)"></ion-searchbar>
+        </ion-col>
+
+        <ion-col size-xl="4" size-md="6" size-xs="12" style="padding-top:12px;">
+          <ion-button color="light" (click)="reset()"> <ion-icon name="refresh-outline"></ion-icon> </ion-button>
+          <ion-button  color="light" >   Nombre de résultats : <b>{{total}}</b></ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+    <ion-list>
+      <ion-item button *ngFor="let item of posts" >
+        <ion-avatar slot="start" class="ion-hide-sm-down">
+          <ion-icon name="accessibility-outline"></ion-icon>
+        </ion-avatar>
+
+
+        <ion-label (click)="edit($event, item)">
+          <ion-text>
+            <h2><b> {{item.title}} </b></h2>
+            <small> ID {{item.id}} {{item.content}} </small>
+          </ion-text>
+        </ion-label>
+
+        <ion-label (click)="edit($event, item)" class="ion-hide-sm-down" style="display: none;">
+        <h2><b> Prix {{item.price}} € </b></h2>
+        </ion-label>
+
+
+        <ion-label (click)="edit($event, item)">
+            <ion-badge color="success" slot="end"> Produit  </ion-badge>
+        </ion-label>
+      
+      
+        <ion-button ion-button outline item-end small color="light" (click)="delete($event, item)" ><ion-icon name="trash-outline"></ion-icon></ion-button>
+      </ion-item>
+    </ion-list>
+   
+    <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+      <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Chargement..."> </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+  </ion-content>
+
+
+  <ion-modal trigger="open-addproduct" (willDismiss)="onWillDismiss($event)">
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+          <ion-buttons slot="start">
+       
+          </ion-buttons>
+          <ion-title> Ajouter </ion-title>
+          <ion-buttons slot="end" color="primary">
+            <ion-button (click)="modal.dismiss()"> Annuler </ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+
+
+      <ion-content class="ion-padding">
+
+          <ion-row >
+            <ion-col sizeLg="12" sizeMd="12" sizeXs="12" > 
+              <ion-item class="roundedInput">
+                <ion-label  position="stacked">Titre</ion-label>
+                <ion-input inputmode="text"[(ngModel)]="title" placeholder="Nom du produit">  </ion-input>
+              </ion-item>
+            </ion-col>
+           </ion-row>
+
+         <ion-row >
+          <ion-col sizeLg="12" sizeMd="12" sizeXs="12" > 
+            <ion-item class="roundedInput">
+              <ion-label  position="stacked">Description</ion-label>
+              <ion-textarea placeholder="Ajoutez une description ..." [autoGrow]="true" [(ngModel)]="content">
+            </ion-textarea>
+            </ion-item>
+          </ion-col>
+         </ion-row>
+
+    
+        <ion-row >
+          <ion-col sizeLg="6" sizeMd="6" sizeXs="12" >
+            <ion-item class="roundedInput">
+             <ion-label position="stacked">Prix</ion-label>
+             <ion-input inputmode="number"[(ngModel)]="price" placeholder="1">  </ion-input>
+           </ion-item>
+         </ion-col>
+         <ion-col sizeLg="6" sizeMd="6" sizeXs="12" > 
+         </ion-col>
+        </ion-row>
+              
+  
+        <ion-button expand="block" color="primary" (click)="doSave()">Enregister</ion-button>
+   
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+</ion-content>
+

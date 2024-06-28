@@ -1,0 +1,223 @@
+<ion-header>
+  <ion-toolbar color="secondary">
+    <ion-buttons slot="start">
+      <ion-back-button ></ion-back-button>
+    </ion-buttons>
+    <ion-title > Facture  </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+  <ion-item>
+    Facture_ID :{{InvoiceID}}
+    <div class="item-note" slot="end"  *ngIf="InvoiceStatus >'0'">
+      <ion-button color="danger" size="medium"  target="_blank" href="http://127.0.0.1:8000/api/invoice/{{InvoiceID}}">Télécharger PDF </ion-button>
+      <ion-button color="success" size="medium"  (click)="invoicesend()" style="display: none;" >Envoyer par email </ion-button>
+    </div>
+  </ion-item>
+
+  <ion-item>
+    <ion-badge color="light" slot="start" *ngIf="InvoiceStatus =='3'" > Annulée </ion-badge>
+    <ion-badge color="success" slot="start" *ngIf="InvoiceStatus =='2'" > Payée </ion-badge>
+    <ion-badge color="primary" slot="start"  *ngIf="InvoiceStatus =='1'" > Verifiée </ion-badge>
+    <ion-badge color="light"  slot="start"  *ngIf="InvoiceStatus =='0'" > A valider  </ion-badge>
+  </ion-item>
+
+  <ion-row *ngIf="!edit2">
+    <ion-col size="6"  *ngFor="let item of user" >
+      Client :
+      <b>  id: {{item.id}}</b>   <br>
+      <b> {{item.company}}</b>   <br>
+      <b> {{item.salutation}} {{item.firstname}} {{item.lastname}}</b>  <br>
+      <b>  {{item.address}} </b><br>
+      <b>  {{item.cp}} {{item.city}}</b> <br>
+      Téléphone : <b> {{item.phone_mobile}} </b> <br>
+      E-mail :  <b>  {{item.email}} </b> <br>
+    </ion-col>
+    <ion-col size="2">   
+    <ion-item fill="outline" >
+    {{ItemTax1}}%
+    </ion-item>
+    </ion-col>
+    <ion-col size="2">  
+    <ion-item fill="outline" >
+    {{DueDate}}
+    </ion-item>
+    </ion-col>
+    <ion-col size="2">
+ 
+    </ion-col>
+  </ion-row>
+
+
+
+
+  <ion-row *ngIf="edit2" display="none">
+    <ion-col size="6">
+        Client :
+        <b>  {{firstname}} {{lastname}}</b> <br> 
+        <b>  {{company}}</b>
+        <b>  {{city}}</b>
+    </ion-col>
+    <ion-col size="2">   
+    <ion-item fill="outline" >
+    <ion-label position="floating"> TVA </ion-label>
+    <ion-input placeholder="Enter text" type="number"  [(ngModel)]="ItemTax1"  > </ion-input>
+    </ion-item>
+    </ion-col>
+    <ion-col size="2">  
+    <ion-item fill="outline" >
+    <ion-label position="floating"> Date limite </ion-label>
+    <ion-input  type="date" [(ngModel)]="DueDate"> </ion-input>
+    </ion-item>
+    </ion-col>
+    <ion-col size="2">
+      <ion-button color="success" size="small" (click)="SaveInvoiceSetting()"> <ion-icon name="save-outline"></ion-icon> </ion-button>
+    </ion-col>
+  </ion-row>
+
+
+  <ion-grid padding>
+      <ion-row>
+     
+          <ion-col size="2"><b>Element</b></ion-col>
+          <ion-col size="6"><b>Description</b></ion-col>
+          <ion-col size="1"><b>Quantité</b></ion-col>
+          <ion-col size="1"><b>Prix</b></ion-col>
+          <ion-col size="2"><b>Total</b></ion-col>
+     
+      </ion-row>
+  
+<ion-list *ngFor="let item of items">
+    <ion-row *ngIf="editnumber==item.id" style="padding-top: 3px;" >
+      <ion-col size="2">
+      <ion-item class="roundedInput">
+        <ion-textarea [autoGrow]="true" [(ngModel)]="ItemName"  >
+       </ion-textarea>
+       </ion-item>
+        </ion-col>
+       <ion-col size="6">   
+        <ion-item class="roundedInput">
+        <ion-textarea [autoGrow]="true" [(ngModel)]="ItemDesc" >
+   
+       </ion-textarea>
+      </ion-item>
+     </ion-col>
+      <ion-col size="1">  
+      <ion-item fill="outline" class="roundedInput">
+      <ion-label position="floating">Quantité</ion-label>
+      <ion-input placeholder="Enter text" type="number" [(ngModel)]="ItemQuantity"> </ion-input>
+      </ion-item>
+      </ion-col>
+
+      <ion-col size="1">  
+        <ion-item fill="outline" class="roundedInput">
+        <ion-label position="floating">Prix Unité</ion-label>
+        <ion-input placeholder="Enter text" type="number" [(ngModel)]="ItemTotal"> </ion-input>
+        </ion-item>
+        </ion-col>
+
+        <ion-col size="1">
+          {{item.ItemTotal}} €
+        </ion-col>
+
+      <ion-col size="1">
+        <ion-button color="success" size="small" *ngIf="editnumber==item.id" (click)="saveItem($event, item)"> <ion-icon name="save-outline"></ion-icon> </ion-button>
+      </ion-col>
+    </ion-row>
+
+    <ion-row *ngIf="editnumber!==item.id">
+      <ion-col size="2">
+        {{item.title}}
+        </ion-col>
+       <ion-col size="6">   
+        <div [innerHTML]="item.content"></div>
+       </ion-col>
+        <ion-col size="1">
+        {{item.qte}} 
+        </ion-col>  
+      <ion-col size="1">
+        {{item.price}}
+      </ion-col>
+
+      <ion-col size="2">
+        {{item.qte*item.price}}
+      </ion-col>
+      <ion-col size="1" style="display: none;">
+        <ion-button color="primary" size="small" (click)="editItem($event, item)"  *ngIf="editnumber!==item.id && editnumber==0">  
+          <ion-icon name="create-outline"></ion-icon>
+        </ion-button>
+        <ion-button ion-button outline item-end  size="small" color="secondary" (click)="deleteItem($event, item)"><ion-icon name="trash-outline"></ion-icon></ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-list>
+
+
+
+
+    <ion-row >
+      <ion-col size="2"> 
+      <ion-button color="primary" size="small" (click)="addItem()" style="display: none;"  > <ion-icon name="add-circle-outline"></ion-icon> Ajouter </ion-button>
+      </ion-col>
+      <ion-col size="8"></ion-col>
+      <ion-col size="1"><b>Sous Total</b></ion-col>
+      <ion-col size="1"><b>{{SubTotal}} €</b></ion-col>
+    </ion-row>
+
+    <ion-row >
+      <ion-col size="10"></ion-col>
+      <ion-col size="1"><b>TVA {{ ItemTax1 | number: '1.0-1' }} %</b></ion-col>
+      <ion-col size="1"><b>{{valueTax}} €</b></ion-col>
+    </ion-row>
+
+
+    <ion-row >
+      <ion-col size="10"></ion-col>
+      <ion-col size="1"><b>Total</b></ion-col>
+      <ion-col size="1"><b>{{Total}} €</b></ion-col>
+    </ion-row>
+
+
+    <ion-button color="primary" expand="block"  (click)="valide()"  *ngIf="InvoiceStatus==0" >
+       Valider
+    </ion-button>
+
+
+    <ion-button color="primary" expand="block"(click)="editPage()" *ngIf="InvoiceStatus==1" fill="outline" >
+      Modifier le statut
+   </ion-button>
+
+
+    <ion-button color="primary" expand="block"(click)="editPage()" *ngIf="InvoiceStatus==2" fill="outline" >
+      Modifier le statut
+   </ion-button>
+
+
+   <ion-button color="primary" expand="block"(click)="editPage()" *ngIf="InvoiceStatus==3" fill="outline" >
+    Modifier le statut
+ </ion-button>
+
+<ion-list *ngIf="edit">
+      <ion-select label="Default label" placeholder="Choisir" [(ngModel)]="InvoiceStatus"  multiple="false" okText="Ok" cancelText="Annuler">
+        <ion-select-option class="select-full-width" value="1"  > 
+          Validée
+        </ion-select-option>
+        <ion-select-option class="select-full-width" value="2"  > 
+         Payée
+        </ion-select-option>
+        <ion-select-option class="select-full-width" value="3"  > 
+          Annulée
+        </ion-select-option>
+      </ion-select>
+   
+    <ion-button color="primary" expand="block"  (click)="updateSatut()" >
+      Enregistrer
+     </ion-button>
+
+  </ion-list>
+  </ion-grid>
+</ion-content>
+
+
+

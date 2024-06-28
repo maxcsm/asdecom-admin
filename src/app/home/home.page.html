@@ -1,0 +1,104 @@
+<ion-header>
+  <ion-toolbar color="secondary">
+    <ion-buttons slot="start">
+      <ion-menu-button ></ion-menu-button>
+    </ion-buttons>
+    <ion-title > Home  </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+
+<ion-content responsive-sm  class="ion-padding">
+  <ion-grid>
+    <ion-col sizeLg="9" sizeMd="9" sizeXs="12" >
+      <ion-list lines="none"   >
+      <ion-item  *ngFor="let item of posts"  lines="none">    
+          <ion-button  color="medium" slot="end" size="small"shape="round" *ngIf="item.role=='1'" > Client </ion-button>
+          <ion-button  color="medium" slot="end" size="small"shape="round" *ngIf="item.role=='2'" > Technicien </ion-button>
+          <ion-button  color="medium" slot="end" size="small"shape="round" *ngIf="item.role=='3'" > Admin </ion-button>
+          <ion-label> 
+          <b>  id: {{item.id}}</b>   <br>
+          entreprise: <b> {{item.company}}</b>   <br>
+          <b> {{item.salutation}} {{item.firstname}} {{item.lastname}}</b>  <br>
+          <b>  {{item.address}} </b><br>
+          <b>  {{item.cp}} {{item.city}}</b> <br>
+          <b>  {{item.state}} {{item.country}}</b> <br>
+          Téléphone : <b> {{item.phone_mobile}} </b> <br>
+          E-mail :  <b>  {{item.email}} </b> <br>
+          </ion-label>
+      </ion-item>
+      </ion-list>
+
+
+      <ion-list style="margin-top: 20px;"  >
+
+        <ion-item button>
+          <ion-label >
+           Les derniers articles
+          </ion-label>
+        </ion-item>
+        <ion-item button *ngFor="let item of latsposts"  [routerLink]="['/posts']">
+          <ion-label >
+            <ion-text>
+              <h2><b> {{item.title}}  </b></h2>
+              <small> {{item.subtitle}}  </small>
+            </ion-text>
+          </ion-label>
+        </ion-item>
+        </ion-list>
+
+
+
+
+
+
+      </ion-col>
+
+
+      <ion-list style="margin-top: 20px;"  >
+
+
+
+      <ion-row style="padding-top:20px;" *ngIf="role==3">
+        <ion-col col-4 col-md-4 style="text-align: center;">
+  
+        <ion-item   [routerLink]="['/customers']" >
+          <ion-button  color="primary" > <ion-icon name="person-outline"></ion-icon> </ion-button>    
+          <p> <b> Voir les clients </b>  </p> 
+        </ion-item>  
+   
+      </ion-col>
+   
+
+      <ion-col col-4 col-md-4  class="ion-text-center">
+    
+        <ion-item   [routerLink]="['/appointements']" >
+          <ion-button  color="primary"> <ion-icon name="calendar-outline"></ion-icon> </ion-button>    
+          <p> <b> Programmes </b> </p> 
+        </ion-item>  
+     
+      </ion-col>
+
+
+      <ion-col col-4 col-md-4  class="ion-text-center">
+   
+        <ion-item   [routerLink]="['/ateliers']" >
+          <ion-button  color="primary" > <ion-icon name="hammer-outline"></ion-icon> </ion-button>    
+          <p> <b> Les ateliers </b> </p> 
+        </ion-item>  
+      
+      </ion-col>
+
+    </ion-row >
+
+
+
+</ion-list>
+
+ 
+</ion-grid>
+   
+
+
+</ion-content>

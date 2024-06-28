@@ -1,0 +1,95 @@
+<ion-header [translucent]="false"  class="hidden-xs hidden-lg" >
+  <ion-toolbar mode="ios" color="secondary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title slot="start"  >
+      Developpeur fullstack
+    </ion-title>
+    <ion-buttons slot="primary"  class="hidden-sm-down">
+      <ion-button   routerLink="/public-posts">
+        Réalisations
+       </ion-button>
+      <ion-button routerLink="/solutions-developpement">
+        Solutions
+       </ion-button>
+       <ion-button  routerLink="/demande-devis">
+       Devis
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+
+
+
+<ion-content >
+  <ion-row justify-content-center>
+    <ion-col size-md="3" size-lg="3" size-xs="12">
+    </ion-col>
+
+    <ion-col align-self-center size-md="6" size-lg="6" size-xs="12">
+ 
+      <ion-row>
+        <ion-col sizeLg="12" sizeMd="12" sizeXs="12" >
+          <ion-card style="background-color: white;color:black;height: 460px;"  >
+            <img  src="{{UrlImage}}images/{{image}}" *ngIf="image"  class='image-view' >
+            <ion-card-header style="background-color: white;color:black;">
+              <ion-card-title style="background-color: white;color:black;">{{title}}</ion-card-title>
+            </ion-card-header>
+            <ion-card-content style="height: 160px;">
+              {{subtitle}}
+              <p>{{content}}</p>
+           
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col sizeLg="12" sizeMd="12" sizeXs="12" >
+          <ion-card style="background-color: white;color:black;"  >
+            <img  src="{{UrlImage}}images/{{image}}"style="width:100%;" *ngIf="image"   >
+          </ion-card>
+        </ion-col>
+    
+        <ion-col sizeLg="12" sizeMd="12" sizeXs="12" >
+          <ion-card style="background-color: white;color:black;"  >
+            <img  src="{{UrlImage}}images/{{image}}" *ngIf="image"   >
+          </ion-card>
+        </ion-col>
+      </ion-row>
+
+
+      <ion-row>
+        <ion-col align-self-center size-md="12" size-lg="12" size-xs="12"
+          style="text-align: center;color:rgb(122, 122, 122); padding: 8%;">
+          <ion-button style="color:rgb(94, 92, 92)" class="ion-button-block-outline icon-only" fill=""
+            class="ion-float-center" href="https://www.linkedin.com/in/maxime-buisson-a9578563/" target="blank_">
+            linkedin
+            <ion-icon name="logo-linkedin" class="ion-float-right" style="color:rgb(94, 92, 92)"></ion-icon>
+          </ion-button>
+
+          <ion-button style="color:rgb(94, 92, 92)" class="ion-button-block-outline icon-only" fill=""
+            color="transparent" class="ion-float-center"
+            href="https://api.whatsapp.com/send?phone=769158421&text=Bonjour,%20quel%20est%20projet%20d'application%20?"
+            target="blank_">
+            whatsapp <ion-icon name="logo-whatsapp"></ion-icon>
+            <ion-icon name="whatsapp" class="ion-float-right" style="color:rgb(146, 146, 146)"></ion-icon>
+          </ion-button>
+
+          <ion-button style="color:rgb(94, 92, 92)" class="ion-button-block-outline icon-only" fill=""
+            color="transparent" class="ion-float-center" href="https://www.instagram.com/alpes_solutech/"
+            target="blank_">
+            instagram <ion-icon name="logo-instagram"></ion-icon>
+            <ion-icon name="whatsapp" class="ion-float-right" style="color:rgb(146, 146, 146)"></ion-icon>
+          </ion-button>
+          <p class="small-text">Alpes Solutech - Siret 53228698600023 - Lyon </p>
+        </ion-col>
+      </ion-row>
+
+    </ion-col>
+    <ion-col size-md="3" size-lg="3" size-xs="12">
+    </ion-col>
+  </ion-row>
+</ion-content>

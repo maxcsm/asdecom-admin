@@ -1,0 +1,59 @@
+<ion-header>
+  <ion-toolbar >
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title> Creation nouveau contrat </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content  class="ion-padding">
+
+  
+<ion-grid>
+<ion-row>
+  <ion-col sizeLg="8" sizeMd="8" sizeXs="12" >
+        <ion-list lines="none" style="margin-top: 20px;"  >
+          <ion-row >
+            <ion-col sizeLg="9" sizeMd="9" sizeXs="12" >
+              <ion-item  *ngFor="let item of client"  lines="none">    
+                  <ion-label> 
+                  <b>  Client </b>   <br>
+                  <b>  id: {{item.id}}</b>   <br>
+                  entreprise: <b> {{item.company}}</b>   <br>
+                  <b> {{item.salutation}} {{item.firstname}} {{item.lastname}}</b>  <br>
+                  <b>  {{item.address}} </b><br>
+                  <b>  {{item.cp}} {{item.city}}</b> <br>
+                  <b>  {{item.state}} {{item.country}}</b> <br>
+                  </ion-label> 
+              </ion-item>
+              </ion-col>   
+              <ion-col sizeLg="3" sizeMd="3" sizeXs="12" >  
+                <ion-item  *ngFor="let item of client"  lines="none">      
+                <ion-button  color="medium" slot="end" size="small"shape="round" *ngIf="item.customer_type=='business'" > Entreprise </ion-button>
+                <ion-button  color="medium" slot="end" size="small"shape="round" *ngIf="item.customer_type=='individual'" > Particulier </ion-button>
+              </ion-item>
+            </ion-col>
+        </ion-row>
+  </ion-list>
+
+
+    <ion-button size="full" expand="full"  shape="round" color="danger" (click)="savePdf()" >
+     Enregistrement PDF<img src="../assets/icon/pdf.png"  >
+    </ion-button>
+
+
+    <ion-button ion-button item-end color="danger"  target="_blank" href="http://127.0.0.1:8000/pdf/{{url}}">  <img src="../assets/icon/pdf.png">  
+      <ion-icon  ios="download-outline" md="download-outline" ></ion-icon> 
+      Télécharger
+    </ion-button>
+
+
+  </ion-col>
+
+  <ion-col sizeLg="4" sizeMd="4" sizeXs="12" >
+
+  </ion-col>
+</ion-row>
+  </ion-grid>
+</ion-content>

@@ -1,0 +1,65 @@
+<ion-header>
+  <ion-toolbar color="secondary">
+    <ion-title >
+     Agenda
+     </ion-title>
+     <ion-buttons slot="end" style="display: none;">
+      <ion-button  id="open-storie" color="primary"><ion-icon name="add-circle"></ion-icon> Ajouter  </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content color="tertiary" >
+  <ion-row justify-content-center>
+    <ion-col size-md="3" size-lg="3" size-xs="12">
+    </ion-col>
+
+    <ion-col align-self-center size-md="6" size-lg="6" size-xs="12">
+
+      <ion-accordion-group>
+        <ion-accordion *ngFor="let item of posts" class="divider-day">
+          <ion-item-divider color="primary" slot="header" >
+            <ion-label> <b> {{item.name}} {{item.day}}  {{item.month}} </b></ion-label>
+            <ion-buttons slot="end"  >
+              <ion-button color="light" ><ion-icon name="chevron-down-outline"></ion-icon></ion-button>
+            </ion-buttons>
+          </ion-item-divider>
+
+          
+
+          <div slot="content">
+            <ion-item *ngFor="let item2 of item.events" >
+              <ion-label >
+                <ion-text>
+                  <h2><b> {{item2.title}} </b></h2>
+                  <small> de <b>{{item2.start_at | date:'hh:mm' }}</b> à <b> {{item2.end_at | date:'hh:mm' }} </b> </small> <br>
+                  <small><ion-icon name="navigate-circle-outline"></ion-icon> {{item2.content}} </small> 
+                </ion-text>
+              </ion-label>
+              <ion-label class="ion-hide-sm-down">
+                <ion-badge color="medium" slot="end" *ngIf="item2.state==1">  Info </ion-badge>
+                <ion-badge color="medium" slot="end" *ngIf="item2.state==2">  Event </ion-badge>
+                <ion-badge color="success" slot="end" *ngIf="item2.state==3"> Atelier </ion-badge>
+              </ion-label>
+              <ion-buttons slot="end" *ngIf="item2.state==3" >
+                <ion-button color="primary" (click)="edit($event, item2)"><ion-icon name="arrow-forward-circle-outline"></ion-icon></ion-button>
+              </ion-buttons>
+              <ion-buttons slot="end" *ngIf="item2.state!==3" >
+              </ion-buttons>
+            </ion-item>
+          </div>
+        </ion-accordion>
+       
+      </ion-accordion-group>
+
+
+    </ion-col>
+    <ion-col size-md="3" size-lg="3" size-xs="12">
+    </ion-col>
+  </ion-row>
+
+
+
+</ion-content>
+
+

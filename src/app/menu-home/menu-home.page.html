@@ -1,0 +1,97 @@
+
+<ion-content responsive-sm color="tertiary">
+
+  <ion-row>
+   <ion-col sizeLg="3" sizeMd="3" sizeXs="12" >
+   </ion-col> 
+   <ion-col sizeLg="6" sizeMd="6" sizeXs="12" >
+     <h1> Actualités </h1>
+       <ion-card  *ngFor="let item of posts" color="primary">
+         <ion-card-content>
+           <ion-card-title>
+             {{ item.title }}
+             </ion-card-title>
+             {{item.content}} <br>
+           <small> le <b>{{item.created_at| date: 'dd/MM/yyyy'}}</b> à <b> {{item.created_at| date:'HH:mm' }} </b> </small><br>
+         </ion-card-content>
+       </ion-card>
+   </ion-col> 
+  <ion-col sizeLg="3" sizeMd="3" sizeXs="12" >
+  </ion-col> 
+ </ion-row>
+
+
+
+ <ion-row>
+   <ion-col sizeLg="3" sizeMd="3" sizeXs="12" >
+   </ion-col> 
+   <ion-col sizeLg="6" sizeMd="6" sizeXs="12" >
+    <h1> Ma Formation </h1>
+     <ion-row>
+       <ion-col sizeLg="6" sizeMd="6" sizeXs="12" >
+         <div class="container-image" [routerLink]="['/tabs/groupe']">
+           <img src="./assets/back2.jpg" class="img-menu">
+           <div class="centered-image">
+             <h1>   Groupe de passage </h1>
+           </div>
+         </div>
+       </ion-col> 
+   
+       <ion-col sizeLg="6" sizeMd="6" sizeXs="12" >
+         <div class="container-image" [routerLink]="['/plan-salles']">
+           <img src="./assets/back3.jpg" class="img-menu">
+           <div class="centered-image">
+             <h1> Plan des salles </h1>
+           </div>
+         </div>
+       </ion-col> 
+     </ion-row>
+   </ion-col> 
+ </ion-row>
+
+
+
+ <ion-row>
+  <ion-col sizeLg="3" sizeMd="3" sizeXs="12" >
+  </ion-col> 
+  <ion-col sizeLg="6" sizeMd="6" sizeXs="12" >
+  <h1> Mes services </h1>
+  <ion-row>
+      <ion-col sizeLg="6" sizeMd="6" sizeXs="12" >
+        <div class="container-image" [routerLink]="['/acces']">
+          <img src="./assets/back6.jpg" class="img-menu">
+          <div class="centered-image">
+            <h1>    Accès </h1>
+          </div>
+        </div>
+
+        <div class="container-image" [routerLink]="['/organisation']">
+          <img src="./assets/back3.jpg" class="img-menu">
+          <div class="centered-image">
+            <h1>   Organisation </h1>
+          </div>
+        </div>
+      </ion-col> 
+  
+      <ion-col sizeLg="6" sizeMd="6" sizeXs="12" >
+        <div class="container-image" [routerLink]="['/services-hotel']">
+          <img src="./assets/back5.jpg" class="img-menu">
+          <div class="centered-image">
+            <h1> Services de l'hôtel </h1>
+          </div>
+        </div>
+ 
+        <div class="container-image" [routerLink]="['/pratique']">
+          <img src="./assets/back7.jpg" class="img-menu">
+          <div class="centered-image">
+            <h1> Pratique </h1>
+          </div>
+        </div>
+      </ion-col> 
+    </ion-row>
+</ion-col> 
+</ion-row>
+</ion-content>
+
+
+

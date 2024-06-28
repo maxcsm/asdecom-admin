@@ -1,0 +1,76 @@
+<ion-header style="background-color: #E4E4E4;">
+  <ion-toolbar >
+    <ion-title >
+    Question
+     </ion-title>
+     <ion-buttons slot="end" >
+      <ion-button color="primary" (click)="closeModal()"><ion-icon name="close-circle"></ion-icon></ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content class="ion-padding" color="tertiary">
+
+
+  
+
+  <ion-row>
+    <ion-col sizeLg="12" sizeMd="12" sizeXs="12" > 
+      <ion-item class="roundedInput">
+        <ion-label  position="stacked">Question </ion-label>
+        <ion-textarea [autoGrow]="true" height=500px placeholder="Votre question ici ..." [autoGrow]="true" [(ngModel)]="question" >
+        </ion-textarea>
+      </ion-item>
+    </ion-col>
+   </ion-row>
+
+   <ion-row>
+    <ion-col sizeLg="12" sizeMd="12" sizeXs="12" > 
+      <ion-label  position="stacked"> Réponse 1 </ion-label>
+      <ion-item class="roundedInput">
+        <ion-input inputmode="text" placeholder="Votre réponse ..." [(ngModel)]="answer1" ></ion-input>
+      </ion-item>
+    </ion-col>
+   </ion-row>
+
+   <ion-row>
+    <ion-col sizeLg="12" sizeMd="12" sizeXs="12" > 
+      <ion-label  position="stacked"> Réponse 2 </ion-label>
+      <ion-item class="roundedInput">
+        <ion-input inputmode="text" placeholder="Votre réponse ..." [(ngModel)]="answer2" ></ion-input>
+      </ion-item>
+    </ion-col>
+   </ion-row>
+
+   <ion-row>
+    <ion-col sizeLg="12" sizeMd="12" sizeXs="12" >
+      <ion-label  position="stacked"> Réponse 3 </ion-label>
+      <ion-item class="roundedInput">
+        
+        <ion-input inputmode="text" placeholder="Votre réponse ..." [(ngModel)]="answer3" ></ion-input>
+      </ion-item>
+    </ion-col>
+   </ion-row>
+
+
+   <ion-row>
+    <ion-col sizeLg="12" sizeMd="12" sizeXs="12" > 
+      <ion-label  position="stacked"> Bonne réponse</ion-label>
+      <ion-item class="roundedInput">
+        <ion-input inputmode="text" placeholder="Bonne réponse ..." [(ngModel)]="answer5" ></ion-input>
+      </ion-item>
+    </ion-col>
+   </ion-row>
+
+
+   
+   
+     <ion-button expand="block"  color="primary"  (click)="doSave()" >Enregister</ion-button>
+    
+     
+
+
+
+ 
+</ion-content>

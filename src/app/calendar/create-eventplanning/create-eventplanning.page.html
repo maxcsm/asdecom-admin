@@ -1,0 +1,131 @@
+<ion-content responsive-sm color="light">
+
+  <ion-content responsive-sm color="light" class="ion-padding">
+    <ion-toolbar color="light">
+      <ion-buttons slot="start">
+        <ion-back-button></ion-back-button>
+      </ion-buttons>
+      <ion-title>   </ion-title>
+      <ion-buttons slot="end">
+          <ion-button  style="margin-top: 4%"> <ion-icon name="person"></ion-icon> <ion-icon name="notifications-outline"></ion-icon> </ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+  
+    <ion-row >
+        <ion-col sizeLg="8" sizeMd="8" sizeXs="12" >
+        <ion-list lines="none" >
+  
+          <ion-row >
+            <ion-col col-12 col-md-12 padding>
+              <ion-item  >
+                <ion-label> 
+                  Jour l'évènement
+                  </ion-label> 
+                  <ion-label> 
+                 <ion-item class="roundedInput">
+                <ion-label position="stacked"> Jour l'évènement </ion-label>
+                <ion-datetime displayFormat="YYYY-MM-DD"  [(ngModel)]="dayHourEvent" placeholder="Select Date" ></ion-datetime>
+               </ion-item>
+              </ion-label> 
+            </ion-item>
+
+
+            <ion-item>
+              <ion-label> 
+                Deadline
+                </ion-label> 
+                <ion-label>  
+          <ion-item class="roundedInput">
+            <ion-label position="stacked"> Deadline </ion-label>
+            <ion-datetime displayFormat="YYYY-MM-DD"  [(ngModel)]="deadline" placeholder="Select Date" ></ion-datetime>
+          </ion-item>
+            </ion-label> 
+          </ion-item>
+
+          <ion-item>
+            <ion-label> 
+              Nombre de participants
+              </ion-label> 
+              <ion-label>  
+                <ion-item  class="roundedInput">
+                  <ion-label position="stacked">Nombre de participants </ion-label>
+                  <ion-select multiple="false" [(ngModel)]="nbrAttendant">
+                    <ion-select-option value="1">1</ion-select-option>
+                    <ion-select-option value="2">2</ion-select-option>
+                    <ion-select-option value="3">3</ion-select-option>
+                    <ion-select-option value="4">4</ion-select-option>
+                    <ion-select-option value="5">5</ion-select-option>
+                    <ion-select-option value="6">6</ion-select-option>
+                    <ion-select-option value="7">7</ion-select-option>
+                    <ion-select-option value="8">8</ion-select-option>
+                    <ion-select-option value="9">9</ion-select-option>
+                    <ion-select-option value="10">10</ion-select-option>
+                    <ion-select-option value="11">11</ion-select-option>
+                    <ion-select-option value="12">12</ion-select-option>
+                  </ion-select>
+                </ion-item>
+          </ion-label> 
+        </ion-item>
+
+    
+        <ion-item>
+        <ion-label > Titre </ion-label>
+        <ion-label>  
+        <ion-item class="roundedInput">
+        <ion-input inputmode="text" placeholder="Nom" [(ngModel)]="title"></ion-input>
+        </ion-item>
+        </ion-label> 
+       </ion-item>
+
+       <ion-item  >
+          <ion-label> 
+            <ion-item class="roundedInput">
+              <ion-label color="dark" position="stacked">Description meta ( max 300 caractères )</ion-label>
+              <ion-textarea maxlength="300" rows="4" inputmode="text" [(ngModel)]="content"></ion-textarea>
+            </ion-item>
+      </ion-label> 
+    </ion-item>
+
+        
+    <ion-item>
+      <ion-label> 
+       Choisir une formation
+        </ion-label> 
+        <ion-label> 
+          <ion-item class="roundedInput">
+            <ion-label position="stacked">Formation</ion-label>
+            <ion-select multiple="false" class="select-full-width" (ionChange)="onChangeType($event)" >
+              <ion-select-option  value="{{item.trainingId}}"  *ngFor="let item of trainings" >{{item.trainingName}}</ion-select-option>
+            </ion-select>
+          </ion-item>
+    </ion-label> 
+  </ion-item>
+      
+         
+
+
+            <ion-item  >
+              <div class="item-note ion-padding" slot="end">
+                <ion-button color="success" size="medium" (click)="doSave()">Enregistrer</ion-button>
+              </div>
+          </ion-item>
+      
+          </ion-col>
+        </ion-row>
+
+      </ion-list>
+      </ion-col>
+  
+
+
+<ion-col sizeLg="4" sizeMd="4" sizeXs="12" >
+
+
+</ion-col>
+   
+  
+</ion-row>
+
+</ion-content>
+
+
